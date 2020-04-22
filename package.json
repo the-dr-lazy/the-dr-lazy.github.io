@@ -1,0 +1,72 @@
+{
+  "name": "thebrodmann.com",
+  "private": true,
+  "description": "Personal Blog",
+  "version": "0.0.0",
+  "author": "Mohammad Hasani <thebrodmann@protonmail.com>",
+  "dependencies": {
+    "gatsby": "^2.20.25",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^6.0.0",
+    "tslib": "^1.11.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.19.0",
+    "gatsby-image": "^2.3.4",
+    "gatsby-plugin-manifest": "^2.3.5",
+    "gatsby-plugin-offline": "^3.1.4",
+    "gatsby-plugin-page-creator": "^2.2.3",
+    "gatsby-plugin-react-helmet": "^3.2.4",
+    "gatsby-plugin-sharp": "^2.5.6",
+    "gatsby-plugin-tsconfig-paths": "^1.0.2",
+    "gatsby-plugin-typescript": "^2.3.3",
+    "gatsby-source-filesystem": "^2.2.4",
+    "gatsby-transformer-sharp": "^2.4.6",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "prettier": "2.0.4",
+    "typescript": "^3.8.3"
+  },
+  "keywords": [
+    "blog",
+    "personal",
+    "FP"
+  ],
+  "license": "GPLv3",
+  "scripts": {
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,json,graphql,yaml,html,md,mdx}\"",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thebrodmann/thebrodmann.com"
+  },
+  "bugs": {
+    "url": "https://github.com/thebrodmann/thebrodmann.com/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{css,scss,json,graphql,yaml,html,md,mdx}": [
+      "npm run format -- --write",
+      "git add"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "npm run format -- --write",
+      "npm run lint -- --fix-dry-run"
+    ]
+  }
+}
