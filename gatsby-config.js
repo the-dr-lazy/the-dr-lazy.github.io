@@ -9,12 +9,6 @@ module.exports = {
     'gatsby-plugin-tsconfig-paths',
     'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-page-creator`,
-      options: {
-        path: `${__dirname}/src/Page`,
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
