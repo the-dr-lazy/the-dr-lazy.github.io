@@ -1,0 +1,9 @@
+@use "Colour";
+
+.c-mdx-figcaption {
+  color: #{Colour.get(grey)};
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  padding-top: 6px;
+}

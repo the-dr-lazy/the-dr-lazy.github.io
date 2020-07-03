@@ -1,0 +1,145 @@
+@use "Colour";
+@use "Theme";
+@use "Typography";
+@use "Direction";
+@use "MQ" as *;
+
+.c-mdx-ordered-list {
+  list-style: none;
+  counter-reset: list;
+  color: #{Colour.get(article-text)};
+  position: relative;
+  padding: 15px 30px 30px 0;
+  margin: 0 auto;
+  transition: #{Theme.$transition};
+  font-size: 18px;
+  width: 100%;
+  max-width: 680px;
+
+  @include mq($until: desktop) {
+    max-width: 507px;
+  }
+
+  @include mq($until: tablet) {
+    max-width: 486px;
+    padding-right: 0px;
+  }
+
+  @include mq($until: phablet) {
+    padding-right: 20px;
+  }
+
+  li {
+    position: relative;
+    padding-bottom: 15px;
+
+    @include mq($until: tablet) {
+      padding-right: 30px;
+    }
+
+    @include mq($until: phablet) {
+      padding-right: 30px;
+    }
+
+    p {
+      @include mq($until: tablet) {
+        padding: 0;
+      }
+    }
+  }
+
+  li > :not(ol, ul) {
+    display: inline;
+  }
+
+  li::before {
+    content: counter(list) '.';
+    counter-increment: list;
+
+    display: inline-block;
+
+    position: absolute;
+    right: -3rem;
+    top: -0.3rem;
+
+    width: 3rem;
+
+    color: #{Colour.get(article-text)};
+
+    @include Typography.font-weight(semibold);
+
+    font-size: 1.3rem;
+
+    @include mq($until: tablet) {
+      right: 0;
+    }
+  }
+}
+
+.c-mdx-unordered-list {
+  list-style: none;
+  counter-reset: list;
+  color: #{Colour.get(article-text)};
+  position: relative;
+  padding: 15px 30px 30px 0;
+  transition: #{Theme.$transition};
+  margin: 0 auto;
+  font-size: 18px;
+  width: 100%;
+  max-width: 680px;
+
+  @include mq($until: desktop) {
+    max-width: 507px;
+  }
+
+  @include mq($until: tablet) {
+    max-width: 486px;
+    padding-right: 0px;
+  }
+
+  @include mq($until: phablet) {
+    padding-right: 20px;
+  }
+
+  li {
+    position: relative;
+    padding-bottom: 15px;
+
+    @include mq($until: tablet) {
+      padding-right: 30px;
+    }
+
+    @include mq($until: phablet) {
+      padding-right: 30px;
+    }
+
+    p {
+      @include mq($until: tablet) {
+        padding: 0;
+      }
+    }
+  }
+
+  li > :not(ol, ul) {
+    display: inline;
+  }
+
+  li::before {
+    content: '';
+
+    display: inline-block;
+
+    position: absolute;
+    right: -30px;
+    top: 8px;
+
+    height: 8px;
+    width: 8px;
+
+    background: #{Colour.get(article-text)};
+
+    @include mq($until: tablet) {
+      right: 0;
+    }
+  }
+}

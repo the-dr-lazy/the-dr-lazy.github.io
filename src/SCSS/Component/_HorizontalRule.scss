@@ -1,0 +1,16 @@
+@use "Colour";
+@use "MQ" as *;
+
+.c-horizontal-rule {
+  position: relative;
+  margin: 140px auto 50px;
+  border-bottom: 1px solid #{Colour.get(horizontal-rule)};
+
+  @include mq($until: tablet) {
+    margin: 60px auto;
+  }
+
+  @include mq($until: phablet) {
+    display: none;
+  }
+}

@@ -1,0 +1,18 @@
+@use "Theme";
+@use "Colour";
+
+.c-mdx-anchor {
+  color: #{Colour.get(accent)};
+
+  transition: #{Theme.$transition};
+
+  &:visited {
+    color: #{Colour.get(accent)};
+    opacity: 0.85;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}

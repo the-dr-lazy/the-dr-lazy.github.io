@@ -1,0 +1,18 @@
+@use "Ease";
+
+.c-loader {
+  visibility: hidden;
+  opacity: 0;
+
+  user-select: none;
+  pointer-events: none;
+
+  transition: visibility 0s 0.2s, opacity 0.2s 0s #{Ease.$out-quad};
+
+  &.-animate {
+    visibility: visible;
+    opacity: 1;
+
+    transition: visibility 0s 0s, opacity 0.3s 0s #{Ease.$in-quad};
+  }
+}

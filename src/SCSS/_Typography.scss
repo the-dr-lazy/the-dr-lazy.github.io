@@ -1,0 +1,205 @@
+@use "sass:math";
+@use "sass:map";
+
+@use "Colour";
+@use "Theme";
+@use "MQ" as *;
+
+/// Text antialiasing
+///
+/// @group Typography
+/// @author Mohammad Hasani
+///
+/// @output Platform compatible text antializing CSS properties
+@mixin font-smoothing {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+}
+
+// @font-face {
+//   font-family: '-apple-system', 'BlinkMacSystemFont', 'San Francisco',
+//     'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI',
+//     'Arial', sans-serif;
+//   font-weight: 400;
+//   font-style: normal;
+// }
+
+@font-face {
+  font-family: 'Farhang V';
+  src: url('../assets/fonts/farhang-web-variable.woff')
+      format('woff-variations'),
+    url('../assets/fonts/farhang-variable.ttf') format('truetype-variations'),
+    local('FarhangVariable');
+  font-weight: 1 900;
+}
+
+$font-families: (
+  en: 'Merriweather',
+  fa: (
+    static: 'Farhang',
+    variable: 'Farhang V',
+  ),
+);
+
+/// Font family helper function as a specific wrap arround map-get for $font-families map
+///
+/// @group Typography
+/// @author Mohammad Hasani
+///
+/// @parameter {String} $key - A key of $font-families map
+/// @return {String | List} A font family or a list of fomt families based on $font-families map
+@function font-family($key) {
+  @if map.has-key($font-families, $key) {
+    @return map.get($font-families, $key);
+  }
+
+  @error "Unknown key '#{$key}' in $font-families map.";
+}
+
+@mixin farhang($weight: false, $sharp: false, $serif: false, $kashidah: false) {
+  @if $weight {
+    --font-farhang-weight: #{$weight};
+  }
+
+  @if $sharp {
+    --font-farhang-sharp: #{$sharp};
+  }
+
+  @if $serif {
+    --font-farhang-serif: #{$serif};
+  }
+
+  @if $kashidah {
+    --font-farhang-kashidah: #{$kashidah};
+  }
+}
+
+:root {
+  @include font-smoothing;
+  @include farhang($weight: 400, $sharp: 0, $serif: 0, $kashidah: 0);
+
+  // Unfortunately postcss-font-magician plugin just loads the first font declared in font-family CSS property.
+  // So as a workarround for this limitation we can define multiple times font-family CSS property
+  // with different font we want to be load by postcss-font-magician.
+  font-family: font-family(en);
+  font-family: map.get(font-family(fa), static);
+  // The intentional font-family CSS property.
+  font-family: font-family(en), serif, map.get(font-family(fa), static);
+
+  cursor: default;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@supports (font-variation-settings: normal) {
+  * {
+    font-variation-settings: 'wght' var(--font-farhang-weight),
+      'SHAR' var(--font-farhang-sharp), 'SERI' var(--font-farhang-serif),
+      'KASH' var(--font-farhang-kashidah);
+  }
+
+  :root {
+    font-family: font-family(en), serif, map.get(font-family(fa), variable);
+  }
+}
+
+$_font-weights: (
+  thin: 100,
+  extralight: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
+  extrablack: 950,
+);
+
+/// Specify font weight with name instead of numerical value
+///
+/// @group Typography
+/// @author Mohammad Hasani
+///
+/// @parameter {String} $key - A key of $_font-weights map
+/// @output Font weight with numerical value
+@mixin font-weight($name) {
+  @if not(map.has-key($_font-weights, $name)) {
+    @error "Unknown key '#{$name}' in $_font-weights map.";
+  }
+
+  $value: map.get($_font-weights, $name);
+
+  @include farhang($weight: $value);
+
+  font-weight: $value;
+}
+
+::selection {
+  background-color: #{Colour.get(selection)};
+
+  @include Theme.dark {
+    color: white;
+  }
+}
+
+// body {
+//   font-family: '-apple-system', 'BlinkMacSystemFont', 'San Francisco',
+//     'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI',
+//     'Arial', sans-serif;
+//   font-size: 1.6rem;
+//   font-weight: 400;
+// }
+
+/// Convert other units to EM unit
+///
+/// @group Typography
+/// @author Mohammad Hasani
+///
+/// @parameter {Number} $target - The target value
+/// @parameter {Number} $base [$base-font-size] - The base value
+/// @return {Number} The converted value to EM unit
+@function em($target, $base: 16) {
+  @if (math.is-unitless($target)) {
+    $target: $target * 1px;
+  }
+
+  @if (math.is-unitless($base)) {
+    $base: $base * 1px;
+  }
+
+  @return #{$target / $base}em;
+}
+
+$_font-weights: (
+  thin: 100,
+  extralight: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
+  extrablack: 950,
+);
+
+.-decoration-underline {
+  text-decoration-line: underline;
+}
+
+%two-line-clamp {
+  text-overflow: ellipsis;
+  overflow-wrap: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  white-space: normal;
+  overflow: hidden;
+
+  @include mq($until: phablet) {
+    -webkit-line-clamp: 3;
+  }
+}

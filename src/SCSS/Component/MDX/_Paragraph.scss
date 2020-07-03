@@ -1,0 +1,7 @@
+@use "Colour";
+
+.c-mdx-paragraph {
+  margin: 0 auto 35px;
+
+  color: #{Colour.get(article-text)};
+}

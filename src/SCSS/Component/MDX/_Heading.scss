@@ -1,0 +1,32 @@
+@use "MQ" as *;
+
+.c-mdx-heading {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+
+  @include mq($until: desktop) {
+    max-width: 507px;
+  }
+
+  @include mq($until: tablet) {
+    max-width: 486px;
+  }
+
+  @include mq($until: phablet) {
+    padding: 0 20px;
+  }
+
+  &.-level-h1,
+  &.-level-h2 {
+    margin: 25px auto 18px;
+
+    @include mq($until: tablet) {
+      margin: 30px auto 18px;
+    }
+  }
+
+  &.-level-h3 {
+    margin: 20px auto 10px;
+  }
+}

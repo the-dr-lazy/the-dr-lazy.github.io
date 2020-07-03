@@ -1,0 +1,46 @@
+@use "MQ" as *;
+
+$narrow: 457px;
+$wide: 1fr;
+
+.c-articles-list-row {
+  display: grid;
+
+  &.-layout-rows {
+    grid-template-rows: 1fr 1fr;
+
+    &.-has-only-one-article {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  &.-layout-tiles {
+    position: relative;
+    grid-template-columns: #{$wide} #{$narrow};
+    grid-template-rows: 2;
+    column-gap: 30px;
+
+    &.-sort-reverse {
+      grid-template-columns: #{$narrow} #{$wide};
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 75px;
+    }
+
+    &,
+    &.-sort-reverse {
+      @include mq($until: desktop-md) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include mq($until: tablet) {
+        grid-template-columns: 1fr;
+
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

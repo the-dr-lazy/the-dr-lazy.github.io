@@ -1,0 +1,239 @@
+@use "Colour";
+@use "MQ" as *;
+
+$token: #fff;
+$language-javascript: #e8696b;
+$javascript: #e8696b;
+$background: #1c202b;
+$comment: #5e6a76;
+$string: #a8e2a8;
+$var: #b3bac5;
+$number: #e4854d;
+$constant: #b3bac5;
+$plain: #fff;
+$doctype: #e8696b;
+$tag: #e8696b;
+$keyword: #d49fd4;
+$boolean: #ff5874;
+$function: #5f8dc3;
+$parameter: #f9965d;
+$class-name: #ffcf74;
+$attr-name: #bf87ba;
+$attr-value: #a8e2a8;
+$interpolation: #fff;
+$punctuation: #5fa8aa;
+$maybe-class-name: #fff;
+$property: #80cbc4;
+$property-access: #fff;
+$namespace: #b2ccd6;
+$highlight: Colour.tint($background, 8%);
+$highlight-border: #ffa7c4;
+$dom: #5f8dc3;
+$operator: #5fa8aa;
+
+// :not(pre) > code[class*='language-'] {
+//   border-radius: 0.3em;
+//   background: var(--inlineCode-bg);
+//   color: var(--inlineCode-text);
+//   padding: 0.15em 0.2em 0.05em;
+//   white-space: normal;
+// }
+
+// pre[data-line] {
+//   padding: 1em 0 1em 3em;
+//   position: relative;
+// }
+
+// .gatsby-highlight-code-line {
+//   background-color: hsla(207, 95%, 15%, 1);
+//   display: block;
+//   margin-right: -1.3125rem;
+//   margin-left: -1.3125rem;
+//   padding-right: 1em;
+//   padding-left: 1.25em;
+//   border-left: 0.25em solid #ffa7c4;
+// }
+
+// .gatsby-highlight {
+//   margin-bottom: 1.75rem;
+//   margin-left: -1.3125rem;
+//   margin-right: -1.3125rem;
+//   border-radius: 10px;
+//   background: #011627;
+//   -webkit-overflow-scrolling: touch;
+//   overflow: auto;
+// }
+
+// @media (max-width: 672px) {
+//   .gatsby-highlight {
+//     border-radius: 0;
+//   }
+// }
+
+// .gatsby-highlight pre[class*='language-'] {
+//   float: left; //   min-width: 100%;
+// }
+.prism-code {
+  direction: ltr;
+  overflow: auto;
+  width: 100%;
+  max-width: 744px;
+  padding: 32px;
+  margin: 0 auto;
+  margin: 15px auto 50px;
+  border-radius: 13px;
+  background: $background;
+  line-height: 1.618;
+  font-size: 16px;
+  font-family: 'Victor Mono';
+
+  *::selection {
+    background-color: #848790;
+  }
+
+  .token-line {
+    border-left: 3px solid transparent;
+    // ${Object.keys(p.theme.colors.prism)
+    //   .map(key => {
+    //     return `.${toKebabCase(key)}{color:${p.theme.colors.prism[key]};}`;
+    //   })
+    //   .reduce((curr, next) => curr + next, ``)};
+  }
+
+  .number-line {
+    display: inline-block;
+    width: 32px;
+    user-select: none;
+    opacity: 0.3;
+    color: #a7a4b1;
+    @include mq($until: tablet) {
+      opacity: 0;
+      width: 0;
+    }
+  }
+
+  // .operator + .maybe-class-name {
+  //   color: #ffcf74 !important;
+  // }
+
+  // .plain ~ .operator {
+  //   color: #5fa8aa !important;
+  // }
+
+  @include mq($until: desktop) {
+    left: -26px;
+  }
+
+  @include mq($until: tablet) {
+    max-width: 526px;
+    padding: 20px 20px;
+    left: 0;
+  }
+
+  @include mq($until: phablet) {
+    text-size-adjust: none;
+    border-radius: 0;
+    margin: 0 auto 25px;
+    padding: 25px 20px;
+    overflow: initial;
+    width: unset;
+    max-width: unset;
+    float: left;
+    min-width: 100%;
+    overflow: initial;
+    position: relative;
+  }
+}
+
+.token {
+  color: $token;
+}
+
+.token.attr-name {
+  color: rgb(173, 219, 103);
+  font-style: italic;
+}
+
+.token.comment {
+  color: rgb(128, 147, 147);
+}
+
+.token.string,
+.token.url {
+  color: rgb(173, 219, 103);
+}
+
+.token.variable {
+  color: rgb(214, 222, 235);
+}
+
+.token.number {
+  color: rgb(247, 140, 108);
+}
+
+.token.builtin,
+.token.char,
+.token.constant,
+.token.function {
+  color: rgb(130, 170, 255);
+}
+
+.token.selector,
+.token.doctype {
+  color: rgb(199, 146, 234);
+  font-style: italic;
+  font-weight: bolder;
+}
+
+.token.tag,
+.token.operator,
+.token.keyword {
+  color: #ffa7c4;
+}
+
+.token.operator {
+  font-weight: 600;
+}
+
+.token.punctuation {
+  color: rgb(199, 146, 234);
+}
+
+.token.class-name {
+  color: rgb(255, 203, 139);
+}
+
+.token.attr-name {
+  color: #addb67;
+  font-style: italic;
+  font-weight: bolder;
+}
+
+.token.boolean {
+  color: rgb(255, 88, 116);
+}
+
+.token.property {
+  color: rgb(128, 203, 196);
+}
+
+.token.namespace {
+  color: rgb(178, 204, 214);
+}
+
+.token.pragma {
+  color: #ffa7c4;
+  font-weight: bolder;
+}
+
+.token-line.highlight-line {
+  margin: 0 -32px;
+  padding: 0 32px;
+  background: $highlight;
+  border-left: 3px solid $highlight-border;
+
+  @include mq($until: tablet) {
+    margin: 0 -20px;
+    padding: 0 20px;
+  }
+}

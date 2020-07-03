@@ -1,0 +1,14 @@
+@forward "List/index";
+
+.c-articles-list {
+  transition: opacity 0.25s;
+
+  &.-show-details {
+    p {
+      display: -webkit-box;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+}

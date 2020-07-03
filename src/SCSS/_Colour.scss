@@ -1,0 +1,133 @@
+@forward "sass:color";
+
+@use "sass:color";
+@use "sass:map";
+@use "Theme";
+
+/// Slightly lighten a colour
+///
+/// @group Colour
+/// @author Mohammad Hasani
+///
+/// @param {Colour} $colour - colour to tint
+/// @param {Number} $percentage - percentage of `$colour` in returned colour
+/// @return {Colour}
+///
+@function tint($colour, $percentage) {
+  @return color.mix(white, $colour, $percentage);
+}
+
+/// Slightly darken a colour
+///
+/// @group Colour
+/// @author Mohammad Hasani
+///
+/// @param {Colour} $colour - colour to shade
+/// @param {Number} $percentage - percentage of `$colour` in returned colour
+/// @return {Colour}
+///
+@function shade($colour, $percentage) {
+  @return color.mix(black, $colour, $percentage);
+}
+
+/// Colour palette map
+///
+/// @group Colour
+/// @author Mohammad Hasani
+///
+/// @prop {Colour} primary - Used for the heading, the link, the button background colour, etc.
+/// @prop {Colour} accent  - N/A
+/// @prop {Colour} black   - N/A
+/// @prop {Colour} gray-7  - N/A
+/// @prop {Colour} gray-6  - N/A
+/// @prop {Colour} gray-5  - N/A
+/// @prop {Colour} gray-4  - N/A
+/// @prop {Colour} gray-3  - N/A
+/// @prop {Colour} gray-2  - N/A
+/// @prop {Colour} gray-1  - Used for the sections background colour
+/// @prop {Colour} white   - N/A
+$_colours: (
+  light: (
+    black: #000000,
+    // gray-8: hsl(0, 0%, 14%),
+      // gray-7: hsl(0, 0%, 30%),
+      // gray-6: hsl(0, 0%, 60%),
+      // gray-5: hsl(0, 0%, 70%),
+      // gray-4: hsl(0, 0%, 80%),
+      // gray-3: hsl(0, 0%, 93%),
+      // gray-2: hsl(0, 0%, 96%),
+      // gray-1: #faf9f5,
+      grey: #73737d,
+    white: #ffffff,
+    primary: #000000,
+    accent: #6166dc,
+    dark: #0d0504,
+    background: #fafafa,
+    background-bottom: #d9dbe0,
+    hover: rgba(0, 0, 0, 0.07),
+    card: #fff,
+    article-text: #08080b,
+    gradient: linear-gradient(180deg, rgba(217, 219, 224, 0) 0%, #d9dbe0 100%),
+    horizontal-rule: rgba(8, 8, 11, 0.15),
+    selection: #{tint(#6166dc, 75%)},
+    track: rgba(8, 8, 11, 0.3),
+    progress: #000,
+    error: #e85454,
+    success: #6ddc61,
+  ),
+  dark: (
+    primary: #fff,
+    accent: #e9daac,
+    background: #111216,
+    background-bottom: #2d3844,
+    hover: rgba(255, 255, 255, 0.07),
+    card: #1d2128,
+    article-text: #fff,
+    gradient: linear-gradient(180deg, #111216 0%, rgba(66, 81, 98, 0.36) 100%),
+    horizontal-rule: rgba(255, 255, 255, 0.15),
+    selection: #e9daac,
+    track: rgba(255, 255, 255, 0.3),
+    progress: #fff,
+    error: #e85454,
+    success: #6ddc61,
+  ),
+);
+
+:root {
+  @each $name, $value in map.get($_colours, light) {
+    --colour-#{$name}: #{$value};
+  }
+
+  &.-theme-dark {
+    @each $name, $value in map.get($_colours, dark) {
+      --colour-#{$name}: #{$value};
+    }
+  }
+}
+
+/// Colour palette helper function as a specific wrap arround map-get for $_colours map
+///
+/// @group Colour
+/// @author Mohammad Hasani
+///
+/// @parameter {String} $key - A key of $_colours map
+/// @return {Colour} Specified colour based on $_colours map
+@function get($key) {
+  @if map.has-key(map.get($_colours, light), $key) {
+    @return 'var(--colour-#{$key})';
+  }
+
+  @error "Unknown key '#{$key}' in $_colours map.";
+}
+
+@function view($theme, $colour) {
+  @if map.has-key($_colours, $theme) {
+    $theme-colours: map.get($_colours, $theme);
+
+    @if map.has-key($theme-colours, $colour) {
+      @return map.get($theme-colours, $colour);
+    }
+  }
+
+  @error "Unknown key '#{$theme}.#{$color}' in $_colours map.";
+}

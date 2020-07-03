@@ -1,7 +1,16 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+// Load static fonts
+require('typeface-merriweather')
+// require('source-map-support').install()
+// require('ts-node').register({
+//   compilerOptions: {
+//     module: 'commonjs',
+//     target: 'es2017',
+//   },
+// })
 
-// You can delete this file if you're not using it
+export { component as wrapRootElement } from './src/Main'
+export const onInitialClientRender = require('./gatsby/browser/onInitialClientRender')
+  .default
+export const onRouteUpdate = require('./gatsby/browser/onRouteUpdate').default
+// export const shouldUpdateScroll = require('./gatsby/browser/shouldUpdateScroll')
+//   .default

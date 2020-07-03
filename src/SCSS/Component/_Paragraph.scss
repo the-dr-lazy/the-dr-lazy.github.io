@@ -1,0 +1,34 @@
+@use "Theme";
+@use "Colour";
+@use "Typography";
+@use "MQ" as *;
+
+.c-paragraph {
+  line-height: 2;
+  font-size: #{Typography.em(18.5px)};
+  color: #{Colour.get(primary)};
+  // color: ${p => p.theme.colors.articleText};
+  // font-family: ${p => p.theme.fonts.sansSerif};
+  transition: #{Theme.$transition};
+
+  width: 100%;
+  max-width: 680px;
+
+  b,
+  strong {
+    @include Typography.font-weight(semibold);
+  }
+
+  @include mq($until: desktop) {
+    max-width: 507px;
+  }
+
+  @include mq($until: tablet) {
+    max-width: 486px;
+    margin: 0 auto 25px;
+  }
+
+  // @include mq($until: phablet) {
+  //   padding: 0 20px;
+  // }
+}

@@ -1,0 +1,27 @@
+@mixin global($direction) {
+  @if $direction != rtl and $direction != ltr {
+    @error "$direction '#{$direction}' is unknown";
+  }
+
+  .-direction-#{$direction} & {
+    @content;
+  }
+}
+
+@mixin local($direction) {
+  @if $direction != rtl and $direction != ltr {
+    @error "$direction '#{$direction}' is unknown";
+  }
+
+  &.-direction-#{$direction} {
+    @content;
+  }
+}
+
+.-direction-rtl {
+  direction: rtl;
+}
+
+.-direction-ltr {
+  direction: ltr;
+}

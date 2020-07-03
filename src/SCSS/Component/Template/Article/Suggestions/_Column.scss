@@ -1,0 +1,165 @@
+@use "Colour";
+@use "Typography";
+@use "MQ" as *;
+
+.c-article-suggestions-column {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: transform 0.33s var(--ease-out-quart);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+  &:hover h2,
+  &:focus h2 {
+    color: #{Colour.get(accent)};
+  }
+
+  &[data-a11y='true']:focus::after {
+    content: '';
+    position: absolute;
+    left: -2%;
+    top: -2%;
+    width: 104%;
+    height: 104%;
+    border: 3px solid #{Colour.get(accent)};
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  &.-narrow {
+    @extend .o-hide-until-tablet !optional;
+  }
+
+  @include mq($until: phablet) {
+    &:active {
+      transform: scale(0.97) translateY(3px);
+    }
+  }
+}
+
+.c-article-suggestions-column__container {
+  position: relative;
+  @media (max-width: 540px) {
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: #{Colour.get(card)};
+  }
+}
+
+.c-article-suggestions-column__image {
+  position: relative;
+  height: 280px;
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3),
+    0 18px 36px -18px rgba(0, 0, 0, 0.33);
+  margin-bottom: 30px;
+  transition: transform 0.3s var(--ease-out-quad),
+    box-shadow 0.3s var(--ease-out-quad);
+
+  @include mq($until: tablet) {
+    height: 220px;
+    margin-bottom: 35px;
+  }
+
+  @include mq($until: phablet) {
+    height: 200px;
+    margin-bottom: 0;
+    box-shadow: none;
+    overflow: hidden;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+
+    .c-article-suggestions-column:hover & {
+      transform: none;
+      box-shadow: initial;
+    }
+  }
+
+  .c-article-suggestions-column.-narrow & {
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.22),
+      0 18px 36px -18px rgba(0, 0, 0, 0.25);
+  }
+
+  .c-article-suggestions-column:hover & {
+    transform: translateY(-1px);
+    box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.27),
+      0 30px 50px -30px rgba(0, 0, 0, 0.3);
+  }
+
+  & > div {
+    height: 100%;
+  }
+}
+
+.c-article-suggestions-column__title {
+  @extend %two-line-clamp;
+
+  font-size: 22px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: #{Colour.get(primary)};
+  // font-family: ${p => p.theme.fonts.serif};
+  transition: color 0.3s ease-in-out;
+
+  .c-article-suggestions-column.-overflow & {
+    margin-bottom: 45px;
+  }
+
+  @include mq($until: tablet) {
+    margin-bottom: 15px;
+  }
+
+  @include mq($until: phablet) {
+    padding: 30px 20px 0;
+    margin-bottom: 10px;
+    -webkit-line-clamp: 3;
+  }
+}
+
+.c-article-suggestions-column__excerpt {
+  @extend %two-line-clamp;
+
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #{Colour.get(grey)};
+  display: box;
+  max-width: 515px;
+
+  @include mq($until: desktop) {
+    display: -webkit-box;
+  }
+
+  @include mq($until: tablet) {
+    margin-bottom: 15px;
+  }
+
+  @include mq($until: phablet) {
+    max-width: 100%;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    -webkit-line-clamp: 3;
+  }
+
+  .c-article-suggestions-column.-overflow & {
+    display: none;
+  }
+
+  .c-article-suggestions-column.-narrow & {
+    max-width: 415px;
+  }
+}
+
+.c-article-suggestions-column__metadata {
+  font-weight: 600;
+  font-size: 16px;
+  color: #{Colour.get(grey)};
+  opacity: 0.33;
+
+  @include mq($until: phablet) {
+    max-width: 100%;
+    padding: 0 20px 30px;
+  }
+}

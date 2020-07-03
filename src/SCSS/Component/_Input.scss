@@ -1,0 +1,115 @@
+@use "Typography";
+@use "Colour";
+@use "Theme";
+@use "Ease";
+
+.c-input {
+  display: flex;
+  flex-direction: column;
+
+  padding: 29px 4px 0 4px;
+}
+
+.c-input__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.c-input__label {
+  --text-color: #{Colour.shade(Colour.view(light, background), 44%)};
+
+  order: -1;
+  position: absolute;
+  top: 50%;
+  right: 13px;
+
+  padding-bottom: 3px;
+  transform: translate3d(0, -50%, 0);
+
+  @include Typography.font-weight(medium);
+  @include Typography.farhang($kashidah: 8);
+  font-size: Typography.em(16px);
+
+  color: var(--text-color);
+
+  transition: top 0.1s linear, right 0.1s linear, transform 0.1s linear,
+    padding 0.1s linear, font-size 0.1s linear;
+
+  @include Theme.dark {
+    --text-color: #62676f;
+  }
+
+  .c-input.-has-filled &,
+  .c-input__input:focus ~ & {
+    top: 0;
+    right: 3px;
+    padding-bottom: 8px;
+    transform: translate3d(0, -100%, 0);
+
+    font-size: Typography.em(15px);
+
+    // transition: top 0.15s #{Ease.$in-quad}, right 0.15s linear,
+    //   transform 0.15s #{Ease.$in-quad}, padding 0.15s #{Ease.$in-quad},
+    //   font-size 0.15s linear;
+  }
+}
+
+.c-input__input {
+  --glow-color: transparent;
+  --border-color: #{Colour.shade(Colour.view(light, background), 4%)};
+
+  width: 100%;
+  height: 55px;
+  padding: 0 13px;
+
+  @include Typography.font-weight(medium);
+  font-size: Typography.em(18px);
+
+  background-color: #{Colour.get(background)};
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  color: #{Colour.get(primary)};
+  box-shadow: 0 0 0 4px var(--glow-color);
+
+  @include Theme.dark {
+    --border-color: #{Colour.get(black)};
+  }
+
+  &:focus {
+    --glow-color: #{Colour.tint(Colour.view(light, accent), 84%)};
+
+    border-color: #{Colour.get(accent)};
+
+    @include Theme.dark {
+      --glow-color: #{rgba(Colour.view(dark, accent), 0.15)};
+    }
+  }
+
+  &.-direction-ltr {
+    direction: ltr;
+  }
+
+  .c-input.-has-error & {
+    --glow-color: #{Colour.tint(Colour.view(light, error), 84%)};
+
+    border-color: #{Colour.get(error)};
+
+    @include Theme.dark {
+      --glow-color: #{rgba(Colour.view(dark, error), 0.15)};
+    }
+  }
+
+  &:focus,
+  .c-input.-has-filled &,
+  .c-input.-has-error & {
+    background-color: #{Colour.get(card)};
+  }
+}
+
+.c-input__error {
+  padding: 8px 0 0 0;
+  color: #{Colour.get(error)};
+
+  @include Typography.font-weight(medium);
+}

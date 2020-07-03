@@ -1,0 +1,17 @@
+@use "sass:map";
+
+$breakpoints: (
+  mobile-sm: 320px,
+  mobile: 376px,
+  phablet: 540px,
+  tablet: 735px,
+  desktop: 1070px,
+  desktop-md: 1280px,
+  desktop-lg: 1440px,
+);
+
+@forward "sass-mq/mq" with (
+  $mq-breakpoints: $breakpoints,
+  // $mq-show-breakpoints: // (mobile-sm, mobile, phablet, tablet, desktop, desktop-md, desktop-lg
+  $mq-show-breakpoints: map.keys($breakpoints)
+);
