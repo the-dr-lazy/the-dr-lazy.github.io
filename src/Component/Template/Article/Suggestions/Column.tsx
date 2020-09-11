@@ -1,10 +1,12 @@
 import React from 'react'
 import cc from 'classcat'
-import { VDOM, Article, defineDisplayName } from '~/Data'
+import { Option, isNone } from 'fp-ts/lib/Option'
+
+import { VDOM, Article, defineDisplayName, monoidVDOM } from '~/Data'
 import { Link } from 'gatsby'
 import { Heading, Image } from '~/Component'
 
-type Props = { article: Article; narrow: boolean }
+type Props = { article: Option<Article>; narrow: boolean }
 
 const classNames = {
   block: 'c-article-suggestions-column',
@@ -22,8 +24,10 @@ const classNames = {
 }
 
 export function component(props: Props): VDOM {
+  if (isNone(props.article)) return monoidVDOM.empty
+
   const { narrow } = props
-  const { slug, hero, title, excerpt, date, timeToRead } = props.article
+  const { slug, hero, title, excerpt, date, timeToRead } = props.article.value
 
   const hasOverflow = narrow && title.length > 35
   const imageSource = narrow ? hero.narrow : hero.regular

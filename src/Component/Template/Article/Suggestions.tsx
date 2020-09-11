@@ -1,5 +1,7 @@
 import React from 'react'
 import cc from 'classcat'
+import * as O from 'fp-ts/lib/Option'
+import { isSome, isNone } from 'fp-ts/lib/Option'
 
 import * as Translation from '~/Translation'
 import { VDOM, Article, monoidVDOM } from '~/Data'
@@ -22,8 +24,10 @@ const classNames = {
   },
 }
 
-export function component({ articles }: Props): VDOM {
-  if (articles.length === 0) {
+export function component(props: Props): VDOM {
+  const articles = props.articles.map(O.fromNullable)
+
+  if (articles.every(isNone)) {
     return monoidVDOM.empty
   }
 
