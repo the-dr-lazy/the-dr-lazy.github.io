@@ -13,7 +13,7 @@ function normalizeHero(article) {
     regular: {},
     narrow: {},
     seo: {},
-  };
+  }
 
   if (article.hero) {
     hero = {
@@ -21,12 +21,12 @@ function normalizeHero(article) {
       regular: article.hero.regular.fluid,
       narrow: article.hero.narrow.fluid,
       seo: article.hero.seo.fixed,
-    };
+    }
   } else {
-    console.log('\u001B[33m', `Missing hero for "${article.title}"`);
+    console.log('\u001B[33m', `Missing hero for "${article.title}"`)
   }
 
-  return hero;
+  return hero
 }
 
 function normalizeAvatar(author) {
@@ -34,19 +34,19 @@ function normalizeAvatar(author) {
     small: {},
     medium: {},
     large: {},
-  };
+  }
 
   if (author.avatar) {
     avatar = {
       small: author.avatar.small.fluid,
       medium: author.avatar.medium.fluid,
       large: author.avatar.large.fluid,
-    };
+    }
   } else {
-    console.log('\u001B[33m', `Missing avatar for "${author.name}"`);
+    console.log('\u001B[33m', `Missing avatar for "${author.name}"`)
   }
 
-  return avatar;
+  return avatar
 }
 
 module.exports.local = {
@@ -54,32 +54,32 @@ module.exports.local = {
     return {
       ...article,
       hero: normalizeHero(article),
-    };
+    }
   },
   authors: ({ node: author }) => {
     return {
       ...author,
       avatar: normalizeAvatar(author),
-    };
+    }
   },
-};
+}
 
 module.exports.contentful = {
   articles: ({ node: article }) => {
     const author = article.author.reduce((curr, next, index, array) => {
       if (array.length === 1) {
-        return next.name;
+        return next.name
       }
 
-      return `${curr + next.name}, `;
-    }, ``);
+      return `${curr + next.name}, `
+    }, ``)
 
     return {
       ...article,
       author,
       body: article.body.childMdx.body,
       timeToRead: article.body.childMdx.timeToRead,
-    };
+    }
   },
   authors: ({ node: author }) => {
     return {
@@ -87,6 +87,6 @@ module.exports.contentful = {
       social: author.social.map(s => ({ url: s })),
       slug: author.fields.slug,
       authorsPage: author.fields.authorsPage,
-    };
+    }
   },
-};
+}
