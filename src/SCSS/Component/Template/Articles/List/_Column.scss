@@ -141,8 +141,6 @@
   @extend %two-line-clamp;
 
   font-size: 21px !important;
-  font-family: 'Merriweather', Georgia, Serif;
-  // font-family: ${p => p.theme.fonts.serif};
   margin-bottom: 10px;
   transition: color 0.3s ease-in-out;
 
