@@ -86,7 +86,7 @@ $font-families: (
   font-family: font-family(en);
   font-family: map.get(font-family(fa), static);
   // The intentional font-family CSS property.
-  font-family: font-family(en), serif, map.get(font-family(fa), static);
+  font-family: font-family(en), map.get(font-family(fa), static);
 
   cursor: default;
   font-size: 16px;
@@ -101,7 +101,7 @@ $font-families: (
   }
 
   :root {
-    font-family: font-family(en), serif, map.get(font-family(fa), variable);
+    font-family: font-family(en), map.get(font-family(fa), variable);
   }
 }
 
