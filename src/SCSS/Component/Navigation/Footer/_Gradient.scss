@@ -1,5 +1,5 @@
-@use "Colour";
-@use "Theme";
+@use 'Theme';
+@use 'Colour';
 
 .c-navigation-footer-gradient {
   position: absolute;
@@ -9,6 +9,18 @@
   height: 590px;
   z-index: 0;
   pointer-events: none;
-  background: #{Colour.get(gradient)};
-  transition: #{Theme.$transition};
+}
+
+%c-navigation-footer-gradient__stop {
+  transition: 0.25s var(--ease-in-out-quad);
+}
+
+.c-navigation-footer-gradient__top {
+  @extend %c-navigation-footer-gradient__stop;
+  stop-color: #{Colour.get(background)};
+}
+
+.c-navigation-footer-gradient__bottom {
+  @extend %c-navigation-footer-gradient__stop;
+  stop-color: #{Colour.get(background-bottom)};
 }

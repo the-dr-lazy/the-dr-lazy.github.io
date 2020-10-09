@@ -59,7 +59,6 @@ export function component(props: Props): VDOM {
           current={props.pageContext.index}
           basePath={props.pageContext.basePath}
         />
-        <Template.Articles.Gradient.component />
       </Section.narrow>
     </>
   )
