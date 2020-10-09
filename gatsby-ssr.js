@@ -5,3 +5,5 @@
  */
 
 // You can delete this file if you're not using it
+
+export { component as wrapRootElement } from './src/Main'
