@@ -44,7 +44,7 @@ export function component(props: Props): VDOM {
 
   return (
     <>
-      <SEO.component pathname={location.pathname} />
+      <SEO.component pathname={props.location.pathname} />
       <Template.Articles.Hero.component
         articlesLayout={state.articles.layout}
         featuredAuthor={featuredAuthor.value}
