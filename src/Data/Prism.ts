@@ -1,12 +1,14 @@
 import Prism from 'prismjs'
 
 declare global {
-  interface Window {
-    Prism: typeof Prism
+  namespace NodeJS {
+    interface Global {
+      Prism: typeof Prism
+    }
   }
 }
 
-window.Prism = Prism
+global.Prism = Prism
 
 require('prismjs/components/prism-haskell')
 require('prismjs/components/prism-javascript')
@@ -31,10 +33,6 @@ require('prismjs/components/prism-yaml')
 require('prismjs/components/prism-nix')
 require('prismjs/components/prism-docker')
 
-// Prism.languages.insertBefore('haskell', 'comment', {
-//   pragma: /^(\{\-\#\s+[A-Z_]+\s+[A-z0-9-_]+\s+\#\-\})$/m,
-// })
-//
 Prism.languages.haskell = Prism.languages.extend('haskell', {
   comment: [
     {
