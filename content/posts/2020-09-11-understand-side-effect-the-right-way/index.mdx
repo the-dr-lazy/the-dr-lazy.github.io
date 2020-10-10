@@ -3,8 +3,6 @@ title: ساید‌افکت را درست درک کنیم!
 author: Dr. Lazy
 date: 2020-09-11
 hero: ./images/hero.jpg
-slug: /x-x-x-x
-# excerpt:
 ---
 
 امان از دست کلمات و اصطلاحات قلبمه و سملبه‌ی
@@ -27,43 +25,51 @@ side-effect.
 
 اگر علاقه‌مند به دیدن ویدئو هستید توصیه میکنم فانکشنال تراپی زیر را حتما تماشا کنید.
 
-`youtube: aTzKzJDuLwM`
+<YouTube videoId="aTzKzJDuLwM" />
 
 ---
 
-<h2 dir="ltr">Side-effect</h2>
+
+<LTR>
+
+## Side-effect
+
+</LTR>
+
 
 اول یک نگاهی به تعریف
 Wikipedia
 کنیم:
 
-<p dir="ltr">
+
+
+<LTR>
 
 > In computer science, an operation, function or expression is said to have a side effect if it modifies some state variable value(s) outside its local environment, ...
 >
 > -- [Wikipedia](<https://en.wikipedia.org/wiki/Side_effect_(computer_science)>)
 
-</p>
+</LTR>
 
 یک مقدار پیچیده شد! ساده‌ترش را ببینیم:
 
-<p dir="ltr">
+<LTR>
 
 > That is to say has an observable effect besides returning a value (the main effect) to the invoker of the operation.
 >
 > -- [Wikipedia](<https://en.wikipedia.org/wiki/Side_effect_(computer_science)>)
 
-</p>
+</LTR>
 
 شاید بد نباشه که به اولین تعریفی که از این کلمه شده هم بپردازیم:
 
-<p dir="ltr">
+<LTR>
 
 > The term Side effect refers to the modification of the nonlocal environment.
 >
 > -- [David A. Spuler and et al.](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.70.2096&rep=rep1&type=pdf)
 
-</p>
+</LTR>
 
 نگران نباشید! این تعاریف برای دوستداران منبع ذکر شده.
 تمامی تعاریف دارند به یک مفهوم ساده اشاره می‌کنند.
@@ -340,13 +346,13 @@ side-effect
 idempotency
 شده‌اید.
 
-<p dir="ltr">
+<LTR>
 
 > These terms have definitions.
 >
 > -- Mohammad Hasani
 
-</p>
+</LTR>
 
 <h3 dir="ltr">Idempotent + Side-effectful</h3>
 
@@ -396,13 +402,13 @@ side-effect
 ارائه شده.
 بیاید بررسی کنیم که این تعاریف نادرست چی هستند؟
 
-<p dir="ltr">
+<LTR>
 
 > ~~Any I/O is a side-effect.~~
 >
 > -- [Eric Elliott](https://twitter.com/_ericelliott/status/1303940672290918400)
 
-</p>
+</LTR>
 
 داخل بحث
 Non-idempotent + Side-effect-free
@@ -412,25 +418,25 @@ I/O
 side-effect
 نیست.
 
-<p dir="ltr">
+<LTR>
 
 > ~~Triggering any external process is a side-effect.~~
 >
 > -- [Eric Elliott](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0#:~:text=A%20side%20effect%20is%20any,the%20parent%20function%20scope%20chain)
 
-</p>
+</LTR>
 
 باز هم داخل
 Non-idempotent + Side-effect-free
 نشان دادیم که اینطور نیست.
 
-<p dir="ltr">
+<LTR>
 
 > ~~Retrieving the value from outside the function scope is side-effect.~~
 >
 > -- [Igor Wojda](https://medium.com/@igorwojda/5-kinds-of-side-effects-a67f6b495af9)
 
-</p>
+</LTR>
 
 جمله بالا چیزی جز چرند نیست.
 در درجه اول باید اشاره کنم خواندن

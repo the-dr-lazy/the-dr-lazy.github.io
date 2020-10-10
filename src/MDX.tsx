@@ -1,5 +1,6 @@
 import React from 'react'
 import { Components, MDXProvider } from '@mdx-js/react'
+import YouTube from 'react-youtube'
 
 import { MDX } from '~/Component'
 import { VDOM } from '~/Data'
@@ -15,8 +16,8 @@ const components: Components = {
   ...MDX.Table,
   ...MDX.Image,
   ...MDX.Code,
-  // code: Code.prism,
-  // pre: Code.pre,
+  LTR: MDX.LTR.component,
+  YouTube: MDX.YouTube.component,
 }
 
 export function provider(props: React.PropsWithChildren<{}>): VDOM {
