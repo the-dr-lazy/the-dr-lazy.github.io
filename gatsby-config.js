@@ -12,15 +12,14 @@ function root(...args) {
 
 module.exports = {
   siteMetadata: {
-    title: 'amygdala :: ∀ a. a → IO Memory',
-    name: 'amygdala',
-    siteURL: 'https://thebrodmann.com',
+    title: "Dr. Lazy's Personal Blog",
+    name: 'Dr. Lazy',
+    siteURL: 'https://the-dr-lazy.github.io',
     basePath: '/',
-    description: 'Technical & Biologic Words from My Heart',
-    hero: 'Technical & Biologic Words from My Heart',
+    description: 'Technical & Biological Words from My Heart',
+    hero: 'Technical & Biological Words from My Heart',
     social: {
-      twitter: 'https://twitter.com/thebrodmann',
-      github: 'https://github.com/thebrodmann',
+      github: 'https://github.com/the-dr-lazy',
     },
   },
   mapping: {
