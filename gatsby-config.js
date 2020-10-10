@@ -30,6 +30,8 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-plugin-tsconfig-paths',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-webpack-size',
+    'gatsby-plugin-webpack-bundle-analyser-v2',
     `gatsby-image`,
     'gatsby-plugin-sharp',
     `gatsby-transformer-sharp`,
