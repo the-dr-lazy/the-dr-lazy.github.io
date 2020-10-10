@@ -7,6 +7,10 @@ enum Status {
 }
 
 function mkStatus$(): BehaviorSubject<Status> {
+  if (typeof window === 'undefined') {
+    return new BehaviorSubject(<Status>Status.Online)
+  }
+
   const subject = new BehaviorSubject(
     window.navigator.onLine ? Status.Online : Status.Offline,
   )
@@ -19,7 +23,7 @@ function mkStatus$(): BehaviorSubject<Status> {
   return subject
 }
 
-const status$: BehaviorSubject<Status> = mkStatus$()
+// const status$: BehaviorSubject<Status> = mkStatus$()
 
 // const status$: Observable<Status> = merge(
 //   of(window.navigator.onLine ? Status.Online : Status.Offline),

@@ -2,6 +2,8 @@ import React from 'react'
 import cc from 'classcat'
 import * as THREE from 'three'
 
+import { monoidVDOM } from '~/Data'
+
 const canvassize = 200
 const length = 30
 const radius = 5.6
@@ -139,6 +141,10 @@ type Props = {
  * Port of https://codepen.io/psyonline/pen/yayYWg
  */
 export function component(props: Props) {
+  if (typeof window === 'undefined') {
+    return monoidVDOM.empty
+  }
+
   const rotatevalue = React.useRef(0.035)
   const acceleration = React.useRef(0)
   const animatestep = React.useRef(0)

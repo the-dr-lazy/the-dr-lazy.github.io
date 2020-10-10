@@ -5,6 +5,9 @@ import {
   combineLatest,
   defer,
   fromEvent,
+  of,
+  NEVER,
+  merge,
 } from 'rxjs'
 import {
   distinctUntilChanged,
@@ -38,8 +41,10 @@ function setClass$<A extends string>(map: { [key in A]: string }) {
 
   return (next: A): Observable<never> =>
     defer(() => {
-      document.documentElement.classList.remove(...keys)
-      document.documentElement.classList.add(map[next])
+      if (typeof window !== 'undefined') {
+        document.documentElement.classList.remove(...keys)
+        document.documentElement.classList.add(map[next])
+      }
 
       return EMPTY
     })
@@ -79,28 +84,46 @@ export const setScrollPositionClass$ = setClass$(
 
 export const setDirectionClass$ = setClass$(classNames.modifiers.direction)
 
-export const scrollTop$: Observable<number> = fromEvent(window, 'scroll').pipe(
+export const scrollTop$: Observable<number> = (typeof window !== 'undefined'
+  ? fromEvent(window, 'scroll', { passive: true })
+  : NEVER
+).pipe(
   observeOn(animationFrameScheduler),
   map(() => document.documentElement.scrollTop),
-  startWith(document.documentElement.scrollTop),
+  startWith(
+    typeof window !== 'undefined' ? document.documentElement.scrollTop : 0,
+  ),
   distinctUntilChanged(),
 )
 
-export const scrollHeight$: Observable<number> = fromEvent(
-  window,
-  'resize',
+export const scrollHeight$: Observable<number> = (typeof window !== 'undefined'
+  ? fromEvent(window, 'resize', { passive: true })
+  : NEVER
 ).pipe(
   observeOn(animationFrameScheduler),
   map(() => document.documentElement.scrollHeight),
-  startWith(document.documentElement.scrollHeight),
+  startWith(
+    typeof window !== 'undefined' ? document.documentElement.scrollHeight : 768,
+  ),
+  distinctUntilChanged(),
+)
+
+export const innerHeight$: Observable<number> = (typeof window !== 'undefined'
+  ? fromEvent(window, 'resize', { passive: true })
+  : NEVER
+).pipe(
+  observeOn(animationFrameScheduler),
+  map(() => window.innerHeight),
+  startWith(typeof window !== 'undefined' ? window.innerHeight : 768),
   distinctUntilChanged(),
 )
 
 export const scrollPosition$: Observable<ScrollPosition> = combineLatest(
   scrollTop$,
   scrollHeight$,
-  (scrollTop, scrollHeight) =>
-    scrollTop / scrollHeight >= 0.5
+  innerHeight$,
+  (scrollTop, scrollHeight, innerHeight) =>
+    scrollTop / (scrollHeight - innerHeight) >= 0.5
       ? ScrollPosition.Bottom
       : ScrollPosition.Top,
 ).pipe(distinctUntilChanged())

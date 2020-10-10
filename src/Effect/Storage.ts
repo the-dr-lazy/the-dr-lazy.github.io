@@ -1,7 +1,7 @@
 import * as O from 'fp-ts/lib/Option'
 import * as t from 'io-ts'
 // import { Option } from 'fp-ts/lib/Option'
-import { EMPTY, Observable, defer, of } from 'rxjs'
+import { EMPTY, Observable, defer, of, NEVER } from 'rxjs'
 import { DateFromNumber as numberDateC } from 'io-ts-types/lib/DateFromNumber'
 import { pipe } from 'fp-ts/lib/pipeable'
 
@@ -42,6 +42,10 @@ function set$(key: Key, value: unknown, expiry: number): Observable<never> {
 
 function get$<A>(key: Key, codec: t.Type<A>): Observable<A> {
   return defer(() => {
+    if (typeof window === 'undefined') {
+      return NEVER
+    }
+
     const entity = pipe(
       window.localStorage.getItem(key),
       O.fromNullable,
