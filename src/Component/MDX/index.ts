@@ -8,6 +8,8 @@ import * as List from './List'
 import * as Table from './Table'
 import * as Image from './Image'
 import * as Code from './Code'
+import * as LTR from './LTR'
+import * as YouTube from './YouTube'
 
 export {
   Heading,
@@ -20,4 +22,6 @@ export {
   Table,
   Image,
   Code,
+  LTR,
+  YouTube,
 }
