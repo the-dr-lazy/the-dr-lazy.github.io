@@ -251,13 +251,11 @@ function mkBlogSchema(props: Props & { socials: string; pageURL: string }) {
 export function component(props: Props): VDOM {
     const metadata = Metadata.ask()
 
-    const fullURL = (path: string) => (path ? `${metadata.siteURL}${path}` : metadata.siteURL)
-
     const { children, pathname, canonicalURL, isBlogPost } = props
 
     const title = props.title || metadata.title
     const description = props.description || metadata.description
-    const image = pipe(props.image, O.fromNullable, O.map(fullURL), O.getOrElse(constant('/preview.jpg')))
+    const image = pipe(props.image, O.fromNullable, O.getOrElse(constant('/preview.jpg')))
     const publishedAt = O.fromNullable(props.publishedAt)
     const timeToRead = O.fromNullable(props.timeToRead)
 
