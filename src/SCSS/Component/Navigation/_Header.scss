@@ -1,6 +1,7 @@
 @use "Colour";
 @use "Direction";
 @use "Theme";
+@use "Ease";
 @use "MQ" as *;
 
 .c-header__nav {
@@ -53,7 +54,7 @@
 }
 
 .c-header__back-arrow-container {
-  transition: 0.2s transform var(--ease-out-quad);
+  transition: 0.2s transform #{Ease.$out-quad};
   opacity: 0;
   padding-right: 30px;
   animation: fadein 0.3s linear forwards;

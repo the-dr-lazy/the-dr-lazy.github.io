@@ -1,8 +1,10 @@
+@use "Ease";
+
 @mixin dark {
   .-theme-dark & {
     @content;
   }
 }
 
-$transition: background 0.25s var(--ease-in-out-quad),
-  color 0.25s var(--ease-in-out-quad);
+$transition: background 0.25s #{Ease.$in-out-quad},
+  color 0.25s #{Ease.$in-out-quad};

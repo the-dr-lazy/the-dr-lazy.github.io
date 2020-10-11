@@ -1,5 +1,6 @@
 @use 'Theme';
 @use 'Colour';
+@use 'Ease';
 
 .c-navigation-footer-gradient {
   position: absolute;
@@ -12,7 +13,7 @@
 }
 
 %c-navigation-footer-gradient__stop {
-  transition: 0.25s var(--ease-in-out-quad);
+  transition: 0.25s #{Ease.$in-out-quad};
 }
 
 .c-navigation-footer-gradient__top {
