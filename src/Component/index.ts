@@ -26,6 +26,7 @@ import * as Subscription from './Subscription'
 import * as Input from './Input'
 import * as Loader from './Loader'
 import * as Promotion from './Promotion'
+import * as Couplet from './Couplet'
 
 export {
   Template,
@@ -51,4 +52,5 @@ export {
   Input,
   Loader,
   Promotion,
+  Couplet,
 }

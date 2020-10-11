@@ -1,4 +1,5 @@
 @use "Colour";
+@use "Typography";
 @use "MQ" as *;
 
 $token: #fff;
@@ -73,6 +74,7 @@ $operator: #5fa8aa;
 // .gatsby-highlight pre[class*='language-'] {
 //   float: left; //   min-width: 100%;
 // }
+
 .prism-code {
   direction: ltr;
   overflow: auto;
@@ -85,7 +87,7 @@ $operator: #5fa8aa;
   background: $background;
   line-height: 1.618;
   font-size: 16px;
-  font-family: 'Victor Mono';
+  font-family: Typography.font-family(mono);
 
   *::selection {
     background-color: #848790;

@@ -41,6 +41,7 @@ $font-families: (
     static: 'Farhang',
     variable: 'Farhang V',
   ),
+  mono: 'Victor Mono',
 );
 
 /// Font family helper function as a specific wrap arround map-get for $font-families map
@@ -85,6 +86,7 @@ $font-families: (
   // with different font we want to be load by postcss-font-magician.
   font-family: font-family(en);
   font-family: map.get(font-family(fa), static);
+  font-family: font-family(mono);
   // The intentional font-family CSS property.
   font-family: font-family(en), map.get(font-family(fa), static);
 
@@ -170,7 +172,7 @@ $_font-weights: (
     $base: $base * 1px;
   }
 
-  @return #{$target / $base}em;
+  @return $target / $base * 1em;
 }
 
 $_font-weights: (

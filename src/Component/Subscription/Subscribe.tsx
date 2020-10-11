@@ -3,15 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 
 import * as Translation from '~/Translation'
 import * as Handlers from '~/Handlers'
-import {
-  Section,
-  Subscription,
-  Heading,
-  Paragraph,
-  Input,
-  Button,
-  Loader,
-} from '~/Component'
+import { Heading, Paragraph, Input, Button } from '~/Component'
 
 type Form = {
   firstName: string
@@ -33,10 +25,6 @@ const classNames = {
       loading: '-is-loading',
     },
   },
-}
-
-type Props = {
-  isLoading: boolean
 }
 
 export function component() {

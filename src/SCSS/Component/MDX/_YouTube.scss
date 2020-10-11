@@ -1,12 +1,49 @@
+@use "Colour";
+@use "Theme";
+@use "MQ" as *;
+
 .c-mdx-youtube {
+  position: relative;
+
   width: 680px;
   height: 382px;
   margin: auto;
   border-radius: 13px;
   overflow: hidden;
+
+  background-color: #{Colour.get(card)};
   box-shadow: 0 8px 55px -5px rgba(0, 0, 0, 0.13);
 
-  .ytp-impression-link {
-    left: 5px;
+  @include Theme.dark {
+    box-shadow: 0 8px 89px -5px rgba(0, 0, 0, 0.55);
+  }
+
+  @include mq($until: tablet) {
+    width: 100vw;
+    height: calc(100vw * 9 / 16);
+    margin: 0 0 34px 0;
+
+    border-radius: 0;
+  }
+}
+
+.c-mdx-youtube__iframe {
+  position: relative;
+  display: hidden;
+  z-index: 3;
+
+  width: 100%;
+  height: 100%;
+
+  .c-mdx-youtube.-ready & {
+    display: block;
+  }
+}
+
+.c-mdx-youtube__loader {
+  z-index: 2;
+
+  .c-mdx-youtube.-ready & {
+    display: hidden;
   }
 }

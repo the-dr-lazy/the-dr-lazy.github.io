@@ -49,12 +49,9 @@ export function component() {
         <Subscription.Image.component className={classNames.elements.image} />
         <div className={classNames.elements.box}>
           {content}
-          <Loader.component
-            background={isDark(theme) ? 0x1d2128 : 0xffffff}
-            foreground={isDark(theme) ? 0xe9daac : 0x6166dc}
-            animate={isLoading}
-            className={classNames.elements.loader}
-          />
+          {isLoading && (
+            <Loader.component className={classNames.elements.loader} />
+          )}
         </div>
       </div>
     </Section.narrow>

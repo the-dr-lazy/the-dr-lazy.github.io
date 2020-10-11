@@ -1,0 +1,13 @@
+@use "Typography";
+
+.c-couplet {
+  @include Typography.farhang(500, false, 10, 5);
+  font-size: Typography.em(15);
+
+  white-space: nowrap;
+}
+
+.c-couplet__space {
+  display: inline-block;
+  width: 34px;
+}
