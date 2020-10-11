@@ -3,7 +3,7 @@ import cc from 'classcat'
 import { Link, navigate } from 'gatsby'
 
 import * as Metadata from '~/Metadata'
-import { A11y, Button, Icon, Logo, Section } from '~/Component'
+import { A11y, Button, Icon, Section } from '~/Component'
 import { Theme, VDOM, defineDisplayName } from '~/Data'
 
 type Props = {
@@ -38,6 +38,7 @@ export function component({
     classNames.elements.homeLink,
     showBackButton && classNames.modifiers.back,
   ])
+
   // const [showBackButton, setShowBackArrow] = useState<boolean>(false)
   // const [previousPath, setPreviousPath] = useState<string>('/')
   // const { sitePlugin } = useStaticQuery(siteQuery)
@@ -77,7 +78,6 @@ export function component({
               <Icon.chevronLeft className={classNames.elements.backArrow} />
             </div>
           )}
-          <Logo.component />
           <A11y.Hidden.component>
             Navigate back to the homepage
           </A11y.Hidden.component>
