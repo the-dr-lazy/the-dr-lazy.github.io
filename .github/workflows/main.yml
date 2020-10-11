@@ -1,0 +1,33 @@
+name: CI
+on:
+    push:
+        branches:
+            - master
+jobs:
+    test-build-release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  persist-credentials: false
+
+            - name: Cache
+              uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: ${{ runner.os }}-node-
+
+            - name: Install Dependencies
+              run: npm ci
+
+            - name: Build
+              run: npm run build
+
+            - name: Deploy
+              uses: JamesIves/github-pages-deploy-action@3.6.2
+              with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  BRANCH: gh-pages
+                  FOLDER: public
+                  CLEAN: true
