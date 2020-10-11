@@ -29,7 +29,7 @@
     "rxjs": "^6.6.3",
     "sass-easing": "^1.0.3",
     "sass-mq": "^5.0.1",
-    "three": "~0.77.0",
+    "three": "~0.121.1",
     "tslib": "^1.14.0",
     "typeface-merriweather": "0.0.72"
   },
