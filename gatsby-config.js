@@ -48,6 +48,11 @@ module.exports = {
       options: {
         postCssPlugins: postCSSConfig.plugins,
         includePaths: [root('node_modules'), root('src/SCSS')],
+        importer(url, _, done) {
+          if (url !== 'Environment') return null
+
+          done({ file: `Environment.${process.env.NODE_ENV}` })
+        },
       },
     },
     // {

@@ -1,5 +1,7 @@
 @use "sass:map";
 
+@use "Environment" as *;
+
 $breakpoints: (
   mobile-sm: 320px,
   mobile: 376px,
@@ -12,6 +14,5 @@ $breakpoints: (
 
 @forward "sass-mq/mq" with (
   $mq-breakpoints: $breakpoints,
-  // $mq-show-breakpoints: // (mobile-sm, mobile, phablet, tablet, desktop, desktop-md, desktop-lg
-  $mq-show-breakpoints: map.keys($breakpoints)
+  $mq-show-breakpoints: if($environment == development, map.keys($breakpoints), ())
 );
