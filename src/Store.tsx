@@ -12,38 +12,35 @@ import { Action, State, epic, reducer } from './Store/index'
 export * from './Store/index'
 
 export function mkStore() {
-  const epicMiddleware = createEpicMiddleware<Action, Action, State>()
+    const epicMiddleware = createEpicMiddleware<Action, Action, State>()
 
-  const store = Redux.createStore(
-    reducer,
-    composeWithDevTools(Redux.applyMiddleware(epicMiddleware)),
-  )
+    const store = Redux.createStore(reducer, composeWithDevTools(Redux.applyMiddleware(epicMiddleware)))
 
-  epicMiddleware.run(epic)
+    epicMiddleware.run(epic)
 
-  return store
+    return store
 }
 
 export function provider(props: React.PropsWithChildren<{}>): VDOM {
-  const store = mkStore()
+    const store = mkStore()
 
-  return <Provider {...props} store={store} />
+    return <Provider {...props} store={store} />
 }
 
 export const getRoot: (state: State) => State = identity
 
 export function getTheme({ theme }: State) {
-  return theme
+    return theme
 }
 
 export function getShowCopyURLMessage({ showCopyURLMessage }: State) {
-  return showCopyURLMessage
+    return showCopyURLMessage
 }
 
 export function getLanguage({ language }: State) {
-  return language
+    return language
 }
 
 export function getSubscription({ subscription }: State) {
-  return subscription
+    return subscription
 }

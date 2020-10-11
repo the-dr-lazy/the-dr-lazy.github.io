@@ -4,113 +4,113 @@
 @use "Typography";
 
 .c-paginator {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
 
-  @include mq($until: tablet) {
-    left: -15px;
-  }
+    @include mq($until: tablet) {
+        left: -15px;
+    }
 
-  @include mq($from: desktop) {
-    justify-content: flex-start;
-  }
+    @include mq($from: desktop) {
+        justify-content: flex-start;
+    }
 
-  // ${mediaqueries.tablet`
-  //   .Paginator__pageLink, ${Spacer} { display: none; }
-  //   left: -15px;
-  // `}
+    // ${mediaqueries.tablet`
+    //   .Paginator__pageLink, ${Spacer} { display: none; }
+    //   left: -15px;
+    // `}
 }
 
 %item {
-  line-height: 1;
-  color: #{Colour.get(primary)};
-  padding: 0;
-  width: 6.8rem;
-  height: 6.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: #{Colour.get(primary)};
+    padding: 0;
+    width: 6.8rem;
+    height: 6.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
 
-  @include mq($from: desktop) {
-    display: block;
-    width: auto;
-    height: auto;
-    padding: 2rem;
+    @include mq($from: desktop) {
+        display: block;
+        width: auto;
+        height: auto;
+        padding: 2rem;
 
-    &:first-of-type {
-      padding-right: 0;
+        &:first-of-type {
+            padding-right: 0;
 
-      @include Direction.global(ltr) {
-        padding-right: 2rem;
-        padding-left: 0;
-      }
+            @include Direction.global(ltr) {
+                padding-right: 2rem;
+                padding-left: 0;
+            }
+        }
+
+        &:last-child {
+            padding-left: 0;
+
+            @include Direction.global(ltr) {
+                padding-left: 2rem;
+                padding-right: 0;
+            }
+        }
     }
-
-    &:last-child {
-      padding-left: 0;
-
-      @include Direction.global(ltr) {
-        padding-left: 2rem;
-        padding-right: 0;
-      }
-    }
-  }
 }
 
 .c-paginator__mobile-reference {
-  @extend %item;
+    @extend %item;
 
-  @include Typography.font-weight(regular);
-  color: #{Colour.get(primary)};
-
-  em {
-    font-style: normal;
+    @include Typography.font-weight(regular);
     color: #{Colour.get(primary)};
-  }
 
-  @include mq($from: desktop) {
-    display: none;
-  }
+    em {
+        font-style: normal;
+        color: #{Colour.get(primary)};
+    }
+
+    @include mq($from: desktop) {
+        display: none;
+    }
 }
 
 .c-paginator__previous,
 .c-paginator__next {
-  @extend %item;
+    @extend %item;
 
-  @include Typography.font-weight(semibold);
-  @include Typography.farhang($kashidah: 8);
-  font-size: 18px;
-  text-decoration: none;
+    @include Typography.font-weight(semibold);
+    @include Typography.farhang($kashidah: 8);
+    font-size: 18px;
+    text-decoration: none;
 
-  color: #{Colour.get(primary)};
+    color: #{Colour.get(primary)};
 
-  &:hover,
-  &:focus {
-    opacity: 1;
-    text-decoration: underline;
-  }
+    &:hover,
+    &:focus {
+        opacity: 1;
+        text-decoration: underline;
+    }
 }
 
 .c-paginator__page {
-  @extend %item;
+    @extend %item;
 
-  @include Typography.font-weight(regular);
-  font-size: 18px;
-  text-decoration: none;
+    @include Typography.font-weight(regular);
+    font-size: 18px;
+    text-decoration: none;
 
-  color: #{Colour.get(primary)};
+    color: #{Colour.get(primary)};
 
-  &:hover,
-  &:focus {
-    opacity: 1;
-    text-decoration: underline;
-  }
+    &:hover,
+    &:focus {
+        opacity: 1;
+        text-decoration: underline;
+    }
 
-  @include mq($until: tablet) {
-    display: none;
-  }
+    @include mq($until: tablet) {
+        display: none;
+    }
 }

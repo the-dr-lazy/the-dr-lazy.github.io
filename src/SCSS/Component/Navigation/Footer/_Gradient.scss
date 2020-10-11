@@ -3,25 +3,25 @@
 @use 'Ease';
 
 .c-navigation-footer-gradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 590px;
-  z-index: 0;
-  pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 590px;
+    z-index: 0;
+    pointer-events: none;
 }
 
 %c-navigation-footer-gradient__stop {
-  transition: 0.25s #{Ease.$in-out-quad};
+    transition: 0.25s #{Ease.$in-out-quad};
 }
 
 .c-navigation-footer-gradient__top {
-  @extend %c-navigation-footer-gradient__stop;
-  stop-color: #{Colour.get(background)};
+    @extend %c-navigation-footer-gradient__stop;
+    stop-color: #{Colour.get(background)};
 }
 
 .c-navigation-footer-gradient__bottom {
-  @extend %c-navigation-footer-gradient__stop;
-  stop-color: #{Colour.get(background-bottom)};
+    @extend %c-navigation-footer-gradient__stop;
+    stop-color: #{Colour.get(background-bottom)};
 }

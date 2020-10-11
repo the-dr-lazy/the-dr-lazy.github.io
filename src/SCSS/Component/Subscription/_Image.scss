@@ -1,13 +1,13 @@
 @use "Colour";
 
 .c-subscription-image {
-  --path-fill: #{Colour.get(accent)};
+    --path-fill: #{Colour.get(accent)};
 
-  width: 185px;
-  user-select: none;
-  pointer-events: none;
+    width: 185px;
+    user-select: none;
+    pointer-events: none;
 
-  path {
-    fill: var(--path-fill);
-  }
+    path {
+        fill: var(--path-fill);
+    }
 }

@@ -76,166 +76,166 @@ $operator: #5fa8aa;
 // }
 
 .prism-code {
-  direction: ltr;
-  overflow: auto;
-  width: 100%;
-  max-width: 744px;
-  padding: 32px;
-  margin: 0 auto;
-  margin: 15px auto 50px;
-  border-radius: 13px;
-  background: $background;
-  line-height: 1.618;
-  font-size: 16px;
-  font-family: Typography.font-family(mono);
+    direction: ltr;
+    overflow: auto;
+    width: 100%;
+    max-width: 744px;
+    padding: 32px;
+    margin: 0 auto;
+    margin: 15px auto 50px;
+    border-radius: 13px;
+    background: $background;
+    line-height: 1.618;
+    font-size: 16px;
+    font-family: Typography.font-family(mono);
 
-  *::selection {
-    background-color: #848790;
-  }
-
-  .token-line {
-    border-left: 3px solid transparent;
-    // ${Object.keys(p.theme.colors.prism)
-    //   .map(key => {
-    //     return `.${toKebabCase(key)}{color:${p.theme.colors.prism[key]};}`;
-    //   })
-    //   .reduce((curr, next) => curr + next, ``)};
-  }
-
-  .number-line {
-    display: inline-block;
-    width: 32px;
-    user-select: none;
-    opacity: 0.3;
-    color: #a7a4b1;
-    @include mq($until: tablet) {
-      opacity: 0;
-      width: 0;
+    *::selection {
+        background-color: #848790;
     }
-  }
 
-  // .operator + .maybe-class-name {
-  //   color: #ffcf74 !important;
-  // }
+    .token-line {
+        border-left: 3px solid transparent;
+        // ${Object.keys(p.theme.colors.prism)
+        //   .map(key => {
+        //     return `.${toKebabCase(key)}{color:${p.theme.colors.prism[key]};}`;
+        //   })
+        //   .reduce((curr, next) => curr + next, ``)};
+    }
 
-  // .plain ~ .operator {
-  //   color: #5fa8aa !important;
-  // }
+    .number-line {
+        display: inline-block;
+        width: 32px;
+        user-select: none;
+        opacity: 0.3;
+        color: #a7a4b1;
+        @include mq($until: tablet) {
+            opacity: 0;
+            width: 0;
+        }
+    }
 
-  @include mq($until: desktop) {
-    left: -26px;
-  }
+    // .operator + .maybe-class-name {
+    //   color: #ffcf74 !important;
+    // }
 
-  @include mq($until: tablet) {
-    max-width: 526px;
-    padding: 20px 20px;
-    left: 0;
-  }
+    // .plain ~ .operator {
+    //   color: #5fa8aa !important;
+    // }
 
-  @include mq($until: phablet) {
-    text-size-adjust: none;
-    border-radius: 0;
-    margin: 0 auto 25px;
-    padding: 25px 20px;
-    overflow: initial;
-    width: unset;
-    max-width: unset;
-    float: left;
-    min-width: 100%;
-    overflow: initial;
-    position: relative;
-  }
+    @include mq($until: desktop) {
+        left: -26px;
+    }
+
+    @include mq($until: tablet) {
+        max-width: 526px;
+        padding: 20px 20px;
+        left: 0;
+    }
+
+    @include mq($until: phablet) {
+        text-size-adjust: none;
+        border-radius: 0;
+        margin: 0 auto 25px;
+        padding: 25px 20px;
+        overflow: initial;
+        width: unset;
+        max-width: unset;
+        float: left;
+        min-width: 100%;
+        overflow: initial;
+        position: relative;
+    }
 }
 
 .token {
-  color: $token;
+    color: $token;
 }
 
 .token.attr-name {
-  color: rgb(173, 219, 103);
-  font-style: italic;
+    color: rgb(173, 219, 103);
+    font-style: italic;
 }
 
 .token.comment {
-  color: rgb(128, 147, 147);
+    color: rgb(128, 147, 147);
 }
 
 .token.string,
 .token.url {
-  color: rgb(173, 219, 103);
+    color: rgb(173, 219, 103);
 }
 
 .token.variable {
-  color: rgb(214, 222, 235);
+    color: rgb(214, 222, 235);
 }
 
 .token.number {
-  color: rgb(247, 140, 108);
+    color: rgb(247, 140, 108);
 }
 
 .token.builtin,
 .token.char,
 .token.constant,
 .token.function {
-  color: rgb(130, 170, 255);
+    color: rgb(130, 170, 255);
 }
 
 .token.selector,
 .token.doctype {
-  color: rgb(199, 146, 234);
-  font-style: italic;
-  font-weight: bolder;
+    color: rgb(199, 146, 234);
+    font-style: italic;
+    font-weight: bolder;
 }
 
 .token.tag,
 .token.operator,
 .token.keyword {
-  color: #ffa7c4;
+    color: #ffa7c4;
 }
 
 .token.operator {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .token.punctuation {
-  color: rgb(199, 146, 234);
+    color: rgb(199, 146, 234);
 }
 
 .token.class-name {
-  color: rgb(255, 203, 139);
+    color: rgb(255, 203, 139);
 }
 
 .token.attr-name {
-  color: #addb67;
-  font-style: italic;
-  font-weight: bolder;
+    color: #addb67;
+    font-style: italic;
+    font-weight: bolder;
 }
 
 .token.boolean {
-  color: rgb(255, 88, 116);
+    color: rgb(255, 88, 116);
 }
 
 .token.property {
-  color: rgb(128, 203, 196);
+    color: rgb(128, 203, 196);
 }
 
 .token.namespace {
-  color: rgb(178, 204, 214);
+    color: rgb(178, 204, 214);
 }
 
 .token.pragma {
-  color: #ffa7c4;
-  font-weight: bolder;
+    color: #ffa7c4;
+    font-weight: bolder;
 }
 
 .token-line.highlight-line {
-  margin: 0 -32px;
-  padding: 0 32px;
-  background: $highlight;
-  border-left: 3px solid $highlight-border;
+    margin: 0 -32px;
+    padding: 0 32px;
+    background: $highlight;
+    border-left: 3px solid $highlight-border;
 
-  @include mq($until: tablet) {
-    margin: 0 -20px;
-    padding: 0 20px;
-  }
+    @include mq($until: tablet) {
+        margin: 0 -20px;
+        padding: 0 20px;
+    }
 }

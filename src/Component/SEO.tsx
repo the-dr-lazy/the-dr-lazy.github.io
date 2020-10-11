@@ -5,40 +5,35 @@ import { pipe } from 'fp-ts/lib/pipeable'
 import { Helmet } from 'react-helmet'
 
 import * as Metadata from '~/Metadata'
-import {
-  VDOM,
-  defineDisplayName,
-  optionToArrayConcatMap,
-  optionToArrayMap,
-} from '~/Data'
+import { VDOM, defineDisplayName, optionToArrayConcatMap, optionToArrayMap } from '~/Data'
 import { isSome } from 'fp-ts/lib/Option'
 
 type Props = React.PropsWithChildren<{
-  title?: string
-  description?: string
-  pathname: string
-  image?: string
-  url?: string
-  canonicalURL?: string | null
-  publishedAt?: string
-  dateForSEO?: string
-  timeToRead?: number
-  isBlogPost?: boolean
-  author?: {
-    slug: string
-    name: string
-    bio: string
-  }
+    title?: string
+    description?: string
+    pathname: string
+    image?: string
+    url?: string
+    canonicalURL?: string | null
+    publishedAt?: string
+    dateForSEO?: string
+    timeToRead?: number
+    isBlogPost?: boolean
+    author?: {
+        slug: string
+        name: string
+        bio: string
+    }
 }>
 
 function mkSiteSchema(props: Props & { socials: string; pageURL: string }) {
-  const metadata = Metadata.ask()
+    const metadata = Metadata.ask()
 
-  const { pageURL, socials } = props
-  const name = props.title || metadata.name
-  const description = props.description || metadata.description
+    const { pageURL, socials } = props
+    const name = props.title || metadata.name
+    const description = props.description || metadata.description
 
-  return `{
+    return `{
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -103,28 +98,20 @@ function mkSiteSchema(props: Props & { socials: string; pageURL: string }) {
     ]
   }
 `.replace(/"[^"]+"|(\s)/gm, function (matched, group1) {
-    if (!group1) {
-      return matched
-    } else {
-      return ''
-    }
-  })
+        if (!group1) {
+            return matched
+        } else {
+            return ''
+        }
+    })
 }
 
 function mkBlogSchema(props: Props & { socials: string; pageURL: string }) {
-  const metadata = Metadata.ask()
+    const metadata = Metadata.ask()
 
-  const {
-    title,
-    dateForSEO,
-    socials,
-    description,
-    pageURL,
-    image,
-    author,
-  } = props
+    const { title, dateForSEO, socials, description, pageURL, image, author } = props
 
-  return `{
+    return `{
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -253,111 +240,103 @@ function mkBlogSchema(props: Props & { socials: string; pageURL: string }) {
     ]
   }
 `.replace(/"[^"]+"|(\s)/gm, function (matched, group1) {
-    if (!group1) {
-      return matched
-    } else {
-      return ''
-    }
-  })
+        if (!group1) {
+            return matched
+        } else {
+            return ''
+        }
+    })
 }
 
 export function component(props: Props): VDOM {
-  const metadata = Metadata.ask()
+    const metadata = Metadata.ask()
 
-  const fullURL = (path: string) =>
-    path ? `${metadata.siteURL}${path}` : metadata.siteURL
+    const fullURL = (path: string) => (path ? `${metadata.siteURL}${path}` : metadata.siteURL)
 
-  const { children, pathname, canonicalURL, isBlogPost } = props
+    const { children, pathname, canonicalURL, isBlogPost } = props
 
-  const title = props.title || metadata.title
-  const description = props.description || metadata.description
-  const image = pipe(
-    props.image,
-    O.fromNullable,
-    O.map(fullURL),
-    O.getOrElse(constant('/preview.jpg')),
-  )
-  const publishedAt = O.fromNullable(props.publishedAt)
-  const timeToRead = O.fromNullable(props.timeToRead)
+    const title = props.title || metadata.title
+    const description = props.description || metadata.description
+    const image = pipe(props.image, O.fromNullable, O.map(fullURL), O.getOrElse(constant('/preview.jpg')))
+    const publishedAt = O.fromNullable(props.publishedAt)
+    const timeToRead = O.fromNullable(props.timeToRead)
 
-  const pageURL = metadata.siteURL + pathname
+    const pageURL = metadata.siteURL + pathname
 
-  const socials = JSON.stringify(
-    Object.values(metadata.social)
-      .filter(isSome)
-      .map(({ value }) => value),
-  )
+    const socials = JSON.stringify(
+        Object.values(metadata.social)
+            .filter(isSome)
+            .map(({ value }) => value),
+    )
 
-  const schema = isBlogPost
-    ? mkBlogSchema({ ...props, socials, pageURL })
-    : mkSiteSchema({ ...props, socials, pageURL })
+    const schema = isBlogPost ? mkBlogSchema({ ...props, socials, pageURL }) : mkSiteSchema({ ...props, socials, pageURL })
 
-  const meta = Array.prototype.concat(
-    [
-      { charset: 'utf-8' },
-      {
-        'http-equiv': 'X-UA-Compatible',
-        content: 'IE=edge',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        name: 'theme-color',
-        content: '#fff',
-      },
-      { itemprop: 'name', content: title },
-      { itemprop: 'description', content: description },
-      { itemprop: 'image', content: image },
-      { name: 'description', content: description },
+    const meta = Array.prototype.concat(
+        [
+            { charset: 'utf-8' },
+            {
+                'http-equiv': 'X-UA-Compatible',
+                content: 'IE=edge',
+            },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1',
+            },
+            {
+                name: 'theme-color',
+                content: '#fff',
+            },
+            { itemprop: 'name', content: title },
+            { itemprop: 'description', content: description },
+            { itemprop: 'image', content: image },
+            { name: 'description', content: description },
 
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:metadata', content: metadata.name },
-      { name: 'twitter:title', content: title },
-      {
-        name: 'twitter:description',
-        content: description,
-      },
-      {
-        name: 'twitter:image',
-        content: image,
-      },
+            { name: 'twitter:card', content: 'summary_large_image' },
+            { name: 'twitter:metadata', content: metadata.name },
+            { name: 'twitter:title', content: title },
+            {
+                name: 'twitter:description',
+                content: description,
+            },
+            {
+                name: 'twitter:image',
+                content: image,
+            },
 
-      { property: 'og:title', content: title },
-      { property: 'og:url', content: pageURL },
-      { property: 'og:image', content: image },
-      {
-        property: 'og:description',
-        content: description,
-      },
-      { property: 'og:metadata_name', content: metadata.title },
-      { property: 'og:type', content: 'webmetadata' },
-    ],
-    optionToArrayMap(metadata.social.twitter, content => ({
-      name: 'twitter:creator',
-      content,
-    })),
-    optionToArrayMap(publishedAt, content => ({
-      name: 'article:published_time',
-      content,
-    })),
-    optionToArrayConcatMap(timeToRead, x => [
-      { name: 'twitter:label1', value: 'Reading time' },
-      { name: 'twitter:data1', value: `${x} min read` },
-    ]),
-  )
+            { property: 'og:title', content: title },
+            { property: 'og:url', content: pageURL },
+            { property: 'og:image', content: image },
+            {
+                property: 'og:description',
+                content: description,
+            },
+            { property: 'og:metadata_name', content: metadata.title },
+            { property: 'og:type', content: 'webmetadata' },
+        ],
+        optionToArrayMap(metadata.social.twitter, content => ({
+            name: 'twitter:creator',
+            content,
+        })),
+        optionToArrayMap(publishedAt, content => ({
+            name: 'article:published_time',
+            content,
+        })),
+        optionToArrayConcatMap(timeToRead, x => [
+            { name: 'twitter:label1', value: 'Reading time' },
+            { name: 'twitter:data1', value: `${x} min read` },
+        ]),
+    )
 
-  return (
-    <Helmet title={title} htmlAttributes={{ lang: 'fa' }} meta={meta}>
-      <script type="application/ld+json">{schema}</script>
-      {canonicalURL && <link rel="canonical" href={canonicalURL} />}
-      {children}
-    </Helmet>
-  )
+    return (
+        <Helmet title={title} htmlAttributes={{ lang: 'fa' }} meta={meta}>
+            <script type="application/ld+json">{schema}</script>
+            {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+            {children}
+        </Helmet>
+    )
 }
 component.defaultProps = {
-  isBlogPost: false,
+    isBlogPost: false,
 }
 
 defineDisplayName('Component.SEO', { component })

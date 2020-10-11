@@ -5,30 +5,30 @@ $large: 1004px;
 $full: 100%;
 
 .c-mdx-image {
-  display: block;
+    display: block;
 
-  width: 100%;
-  margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 
-  display: inline-block;
-  position: relative;
-  max-width: 100%;
-  height: auto;
-  z-index: 0;
-  margin: 15px auto 50px;
-  border-radius: 5px;
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    z-index: 0;
+    margin: 15px auto 50px;
+    border-radius: 5px;
 
-  @include mq($until: tablet) {
-    margin: 10px auto 45px;
-  }
+    @include mq($until: tablet) {
+        margin: 10px auto 45px;
+    }
 
-  & ~ div {
-    background: transparent !important;
-  }
+    & ~ div {
+        background: transparent !important;
+    }
 }
 
 .gatsby-resp-image-background-image {
-  display: none !important;
+    display: none !important;
 }
 
 // img {
@@ -45,86 +45,86 @@ $full: 100%;
 // }
 
 div.Image__Small {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  max-width: 100%;
-  height: auto;
-  z-index: 0;
-  margin: 15px auto 50px;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    z-index: 0;
+    margin: 15px auto 50px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 680px;
 
-  @include mq($until: tablet) {
-    margin: 10px auto 45px;
-  }
+    @include mq($until: tablet) {
+        margin: 10px auto 45px;
+    }
 
-  @include mq($until: desktop) {
-    max-width: 507px;
-  }
+    @include mq($until: desktop) {
+        max-width: 507px;
+    }
 
-  @include mq($until: tablet) {
-    max-width: 486px;
-    margin: 0 auto 25px;
-  }
+    @include mq($until: tablet) {
+        max-width: 486px;
+        margin: 0 auto 25px;
+    }
 
-  @include mq($until: phablet) {
-    padding: 0 20px;
-  }
+    @include mq($until: phablet) {
+        padding: 0 20px;
+    }
 }
 
 .Image__Container {
-  text-align: center;
+    text-align: center;
 }
 
 img.Image__With-Shadow {
-  box-shadow: 0px 15px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 15px 60px rgba(0, 0, 0, 0.15);
 }
 
 div.Image__Medium {
-  position: relative;
-  margin: 15px auto 50px;
-  width: 100%;
-  max-width: $large;
+    position: relative;
+    margin: 15px auto 50px;
+    width: 100%;
+    max-width: $large;
 
-  // @include mq($until: desktop-md) {
-  //   right: -34px;
-  // }
+    // @include mq($until: desktop-md) {
+    //   right: -34px;
+    // }
 
-  // @include mq($until: desktop) {
-  //   right: -26px;
-  // }
+    // @include mq($until: desktop) {
+    //   right: -26px;
+    // }
 
-  @include mq($until: tablet) {
-    border-radius: 0;
-    // right: 0;
-    margin: 0 auto 25px;
+    @include mq($until: tablet) {
+        border-radius: 0;
+        // right: 0;
+        margin: 0 auto 25px;
 
-    img {
-      border-radius: 0;
+        img {
+            border-radius: 0;
+        }
     }
-  }
 }
 
 div.Image__Large {
-  position: relative;
-  // right: -68px;
-  width: $full;
-  margin: 25px auto 60px;
-  pointer-events: none;
-  /* To allow interaction for all external interactions: YouTube, Twitter, Gist */
-  iframe {
-    pointer-events: all;
-  }
-  img {
-    border-radius: 0;
-  }
-  // @include mq($until: desktop) {
-  //   right: -53px;
-  // }
-  @include mq($until: tablet) {
-    // right: 0;
-    margin: 0 auto 25px;
-  }
+    position: relative;
+    // right: -68px;
+    width: $full;
+    margin: 25px auto 60px;
+    pointer-events: none;
+    /* To allow interaction for all external interactions: YouTube, Twitter, Gist */
+    iframe {
+        pointer-events: all;
+    }
+    img {
+        border-radius: 0;
+    }
+    // @include mq($until: desktop) {
+    //   right: -53px;
+    // }
+    @include mq($until: tablet) {
+        // right: 0;
+        margin: 0 auto 25px;
+    }
 }

@@ -12,19 +12,19 @@ import { VDOM, defineDisplayName } from '~/Data'
 import './Main.scss'
 
 export function component({ element }: WrapRootElementNodeArgs): VDOM {
-  return (
-    <Store.provider>
-      <Translation.provider>
-        <Handlers.provider>
-          <Metadata.provider>
-            <MDX.provider>
-              <Layout.component>{element}</Layout.component>
-            </MDX.provider>
-          </Metadata.provider>
-        </Handlers.provider>
-      </Translation.provider>
-    </Store.provider>
-  )
+    return (
+        <Store.provider>
+            <Translation.provider>
+                <Handlers.provider>
+                    <Metadata.provider>
+                        <MDX.provider>
+                            <Layout.component>{element}</Layout.component>
+                        </MDX.provider>
+                    </Metadata.provider>
+                </Handlers.provider>
+            </Translation.provider>
+        </Store.provider>
+    )
 }
 
 defineDisplayName('Main', { component })

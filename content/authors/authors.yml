@@ -1,8 +1,8 @@
 - name: Dr. Lazy
   bio: |
-    دانشجوی پزشکی حال و جراح مغز و اعصاب آینده و یک FP zombie تمام عیار!
+      دانشجوی پزشکی حال و جراح مغز و اعصاب آینده و یک FP zombie تمام عیار!
   avatar: ./avatars/dr-lazy.jpg
   social:
-    - url: https://github.com/the-dr-lazy
-    - url: https://twitter.com/the_dr_lazy
+      - url: https://github.com/the-dr-lazy
+      - url: https://twitter.com/the_dr_lazy
   featured: true

@@ -2,13 +2,13 @@
 @use "Theme";
 
 .c-icon {
-  --path-fill: #{Colour.get(black)};
+    --path-fill: #{Colour.get(black)};
 
-  @include Theme.dark {
-    --path-fill: #{Colour.get(white)};
-  }
+    @include Theme.dark {
+        --path-fill: #{Colour.get(white)};
+    }
 }
 
 .c-icon__path {
-  fill: var(--path-fill);
+    fill: var(--path-fill);
 }

@@ -90,11 +90,11 @@ side-effect
 
 به مثال‌های زیر توجه کنید:
 
-- نوشتن یک فایل روی دیسک
-- پاک کردن user
-- نوشتن یک بلاگ پست جدید
-- آغاز جنگ جهانی سوم
-- خودکشی
+-   نوشتن یک فایل روی دیسک
+-   پاک کردن user
+-   نوشتن یک بلاگ پست جدید
+-   آغاز جنگ جهانی سوم
+-   خودکشی
 
 در هر کدام از موارد فوق شما یک تغییری در جهان اطراف ایجاد کردید، پس اولین شرط لازم به‌وجود آوردن یک
 side-effect
@@ -108,14 +108,14 @@ mutation
 
 ```js {4,5,7}
 function f() {
-  let x = 0
+    let x = 0
 
-  ++x
-  ++x
+    ++x
+    ++x
 
-  x = 1
+    x = 1
 
-  return x
+    return x
 }
 ```
 
@@ -188,10 +188,7 @@ idempotency
 یعنی از روی یکی نمی‌تونیم دیگری را اثبات کنیم.
 
 <div class="Image__Medium">
-  <img
-    src="./images/impure-function.jpg"
-    alt="relation of side-effect and idempotency."
-  />
+    <img src="./images/impure-function.jpg" alt="relation of side-effect and idempotency." />
 </div>
 
 تصویر بالا تفاوت این دو مفهوم و دلیل عدم ارتباطشان را به شما نشان میده.
@@ -225,10 +222,7 @@ side-effect
 <h2 dir="ltr">Pure Function (A.K.A. Referential Transparent)</h2>
 
 <div class="Image__Medium">
-  <img
-    src="./images/pure-function.jpg"
-    alt="pure function and referential transparency."
-  />
+    <img src="./images/pure-function.jpg" alt="pure function and referential transparency." />
 </div>
 
 فانکشن‌هایی که
@@ -244,10 +238,7 @@ pure
 <h2 dir="ltr">Impure Function (A.K.A. Referential Opaque)</h2>
 
 <div class="Image__Medium">
-  <img
-    src="./images/impure-function.jpg"
-    alt="impure function and referential opacity."
-  />
+    <img src="./images/impure-function.jpg" alt="impure function and referential opacity." />
 </div>
 
 اگر فانکشن ما
@@ -270,25 +261,22 @@ procudure
 <h3 dir="ltr">Non-idempotent + Side-effect-free</h3>
 
 <div class="Image__Medium">
-  <img
-    src="./images/non-idempotent-function.jpg"
-    alt="non-idempotent function."
-  />
+    <img src="./images/non-idempotent-function.jpg" alt="non-idempotent function." />
 </div>
 
 ```js
 let x = 0
 
 function getX() {
-  return x
+    return x
 }
 
 function now() {
-  return Date.now()
+    return Date.now()
 }
 
 function random() {
-  return Math.random()
+    return Math.random()
 }
 ```
 
@@ -314,7 +302,7 @@ side-effect
 
 ```js
 function fetchUser(id) {
-  return API.getUser(id) // GET /users/:id - endpoint doesn't perform any side-effect
+    return API.getUser(id) // GET /users/:id - endpoint doesn't perform any side-effect
 }
 ```
 
@@ -354,17 +342,14 @@ idempotency
 <h3 dir="ltr">Idempotent + Side-effectful</h3>
 
 <div class="Image__Medium">
-  <img
-    src="./images/side-effectful-function.jpg"
-    alt="side-effectful function."
-  />
+    <img src="./images/side-effectful-function.jpg" alt="side-effectful function." />
 </div>
 
 ```js
 function f() {
-  API.startWW3()
+    API.startWW3()
 
-  return 1
+    return 1
 }
 ```
 
@@ -378,15 +363,12 @@ idempotent
 <h3 dir="ltr">Non-idempotent + Side-effectful</h3>
 
 <div class="Image__Medium">
-  <img
-    src="./images/non-idempotent-side-effectful-function.jpg"
-    alt="non-idempotent side-effectful function."
-  />
+    <img src="./images/non-idempotent-side-effectful-function.jpg" alt="non-idempotent side-effectful function." />
 </div>
 
 ```js
 function f(data) {
-  return API.postUser(data) // POST /users/:id - register new user
+    return API.postUser(data) // POST /users/:id - register new user
 }
 ```
 
@@ -451,7 +433,7 @@ const x = 'Hello World'
 
 // Pure Function
 function f() {
-  return x
+    return x
 }
 ```
 

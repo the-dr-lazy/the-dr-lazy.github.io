@@ -4,37 +4,37 @@
 @use "MQ" as *;
 
 .c-article-author {
-  display: flex;
-  align-items: center;
-  color: inherit;
+    display: flex;
+    align-items: center;
+    color: inherit;
 }
 
 .c-article-author__name {
-  transition: #{Theme.$transition};
+    transition: #{Theme.$transition};
 
-  &:hover {
-    color: #{Colour.get(primary)};
-  }
+    &:hover {
+        color: #{Colour.get(primary)};
+    }
 }
 
 .c-article-author__avatar {
-  height: 25px;
-  width: 25px;
-  margin-left: 14px;
-  border-radius: 50%;
-  // background: #{Colour.get(grey)};
-  overflow: hidden;
+    height: 25px;
+    width: 25px;
+    margin-left: 14px;
+    border-radius: 50%;
+    // background: #{Colour.get(grey)};
+    overflow: hidden;
 
-  @include Direction.global(ltr) {
-    margin-left: 0;
-    margin-right: 14px;
-  }
+    @include Direction.global(ltr) {
+        margin-left: 0;
+        margin-right: 14px;
+    }
 
-  .gatsby-image-wrapper > div {
-    padding-bottom: 100% !important;
-  }
+    .gatsby-image-wrapper > div {
+        padding-bottom: 100% !important;
+    }
 
-  @include mq($until: phablet) {
-    display: none;
-  }
+    @include mq($until: phablet) {
+        display: none;
+    }
 }

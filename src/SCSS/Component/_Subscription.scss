@@ -6,84 +6,84 @@
 @use "MQ" as *;
 
 .c-subscription {
-  direction: rtl;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: relative;
-  margin: -180px auto 100px;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+    margin: -180px auto 100px;
 }
 
 .c-subscription__image {
-  z-index: 3;
+    z-index: 3;
 
-  margin-left: 88px;
-  transform: translateY(32.19%);
+    margin-left: 88px;
+    transform: translateY(32.19%);
 
-  @include mq($until: desktop) {
-    margin-left: 21px;
-  }
+    @include mq($until: desktop) {
+        margin-left: 21px;
+    }
 
-  @incude mq($until: tablet) {
-    margin-left: 13px;
-  }
+    @incude mq($until: tablet) {
+        margin-left: 13px;
+    }
 }
 
 .c-subscription__box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
-  position: relative;
-  z-index: 1;
-
-  width: 100%;
-  padding: 55px 88px;
-
-  background: #{Colour.get(card)};
-  box-shadow: 0px 4px 55px rgba(0, 0, 0, 0.05);
-
-  @include Theme.dark {
-    box-shadow: 0px 4px 89px rgba(0, 0, 0, 0.5);
-  }
-
-  &::before {
-    content: '';
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
+    position: relative;
+    z-index: 1;
 
     width: 100%;
-    height: 100%;
+    padding: 55px 88px;
 
-    background-color: #{Colour.get(card)};
-    visibility: hidden;
-    opacity: 0;
+    background: #{Colour.get(card)};
+    box-shadow: 0px 4px 55px rgba(0, 0, 0, 0.05);
 
-    transition: visibility 0s 0.4s linear, opacity 0.3s 0.1s #{Ease.$in-quad};
-
-    .c-subscription.-is-loading & {
-      visibility: visible;
-      opacity: 1;
-
-      transition: visibility 0s 0s linear, opacity 0.3s 0s #{Ease.$out-quad};
+    @include Theme.dark {
+        box-shadow: 0px 4px 89px rgba(0, 0, 0, 0.5);
     }
-  }
+
+    &::before {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+
+        width: 100%;
+        height: 100%;
+
+        background-color: #{Colour.get(card)};
+        visibility: hidden;
+        opacity: 0;
+
+        transition: visibility 0s 0.4s linear, opacity 0.3s 0.1s #{Ease.$in-quad};
+
+        .c-subscription.-is-loading & {
+            visibility: visible;
+            opacity: 1;
+
+            transition: visibility 0s 0s linear, opacity 0.3s 0s #{Ease.$out-quad};
+        }
+    }
 }
 
 .c-subscription__loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
 
-  transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
-  .c-subscription.-is-loading & {
-    transition-delay: 0s, 0.3s;
-  }
+    .c-subscription.-is-loading & {
+        transition-delay: 0s, 0.3s;
+    }
 }
 
 // .c-subscription {

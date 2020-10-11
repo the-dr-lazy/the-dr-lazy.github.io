@@ -3,67 +3,67 @@
 @use "MQ" as *;
 
 .c-heading {
-  @include Typography.font-weight(black);
-  @include Typography.farhang($sharp: 10, $serif: 10, $kashidah: 13);
+    @include Typography.font-weight(black);
+    @include Typography.farhang($sharp: 10, $serif: 10, $kashidah: 13);
 
-  color: #{Colour.get(primary)};
-  // font-family: ${p.theme.fonts.serif};
-  word-break: keep-all;
+    color: #{Colour.get(primary)};
+    // font-family: ${p.theme.fonts.serif};
+    word-break: keep-all;
 
-  &.-level-h2 {
-    font-size: 32px;
-    line-height: 1.333;
+    &.-level-h2 {
+        font-size: 32px;
+        line-height: 1.333;
 
-    @include mq($until: desktop) {
-      font-size: 21px;
-    }
-    @include mq($until: tablet) {
-      font-size: 24px;
-      line-height: 1.45;
-    }
-    @include mq($until: phablet) {
-      font-size: 22px;
-    }
-  }
-
-  &.-level-h3 {
-    font-size: 24px;
-    line-height: 1.45;
-
-    @include mq($until: tablet) {
-      font-size: 22px;
+        @include mq($until: desktop) {
+            font-size: 21px;
+        }
+        @include mq($until: tablet) {
+            font-size: 24px;
+            line-height: 1.45;
+        }
+        @include mq($until: phablet) {
+            font-size: 22px;
+        }
     }
 
-    @include mq($until: phablet) {
-      font-size: 20px;
+    &.-level-h3 {
+        font-size: 24px;
+        line-height: 1.45;
+
+        @include mq($until: tablet) {
+            font-size: 22px;
+        }
+
+        @include mq($until: phablet) {
+            font-size: 20px;
+        }
     }
-  }
 
-  &.-level-h4 {
-    font-size: 18px;
-    line-height: 1.45;
+    &.-level-h4 {
+        font-size: 18px;
+        line-height: 1.45;
 
-    @include mq($until: phablet) {
-      font-size: 16px;
+        @include mq($until: phablet) {
+            font-size: 16px;
+        }
     }
-  }
 
-  &.-level-h5 {
-    font-size: 18px;
-    line-height: 1.45;
+    &.-level-h5 {
+        font-size: 18px;
+        line-height: 1.45;
 
-    @include mq($until: phablet) {
-      font-size: 16px;
+        @include mq($until: phablet) {
+            font-size: 16px;
+        }
     }
-  }
 
-  &.-level-h6 {
-    font-size: 16px;
-    line-height: 1.45;
+    &.-level-h6 {
+        font-size: 16px;
+        line-height: 1.45;
 
-    @include mq($until: phablet) {
-      font-size: 14px;
-      font-size: 16px;
+        @include mq($until: phablet) {
+            font-size: 14px;
+            font-size: 16px;
+        }
     }
-  }
 }

@@ -8,46 +8,46 @@ import * as Effect from '~/Effect'
 import { VDOM } from '~/Data'
 
 type Handlers = {
-  onSetArticlesLayoutRows(): void
-  onSetArticlesLayoutTiles(): void
-  onToggleTheme(): void
-  onCopyURLToClipboard(): void
-  onSubscribe(spec: Effect.Subscription.SubscribeSpec): void
-  onResubscribe(): void
+    onSetArticlesLayoutRows(): void
+    onSetArticlesLayoutTiles(): void
+    onToggleTheme(): void
+    onCopyURLToClipboard(): void
+    onSubscribe(spec: Effect.Subscription.SubscribeSpec): void
+    onResubscribe(): void
 }
 
 const handlers: Handlers = {
-  onSetArticlesLayoutRows: Store.setArticlesLayoutRows,
-  onSetArticlesLayoutTiles: Store.setArticlesLayoutTiles,
-  onToggleTheme: Store.toggleTheme,
-  onCopyURLToClipboard: Store.copyURLToClipboard,
-  onSubscribe: Store.subscribe,
-  onResubscribe: Store.resubscribe,
+    onSetArticlesLayoutRows: Store.setArticlesLayoutRows,
+    onSetArticlesLayoutTiles: Store.setArticlesLayoutTiles,
+    onToggleTheme: Store.toggleTheme,
+    onCopyURLToClipboard: Store.copyURLToClipboard,
+    onSubscribe: Store.subscribe,
+    onResubscribe: Store.resubscribe,
 }
 
 function mkHandlers(dispatch: Redux.Dispatch): Handlers {
-  return Redux.bindActionCreators(handlers, dispatch)
+    return Redux.bindActionCreators(handlers, dispatch)
 }
 
 const context = React.createContext<Option<Handlers>>(none)
 
 export function provider(props: React.PropsWithChildren<{}>): VDOM {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-  const { Provider } = context
+    const { Provider } = context
 
-  return <Provider value={some(mkHandlers(dispatch))} {...props}></Provider>
+    return <Provider value={some(mkHandlers(dispatch))} {...props}></Provider>
 }
 
 export function ask(): Handlers {
-  const handlers = React.useContext(context)
+    const handlers = React.useContext(context)
 
-  if (isNone(handlers)) {
-    throw new Error(`
+    if (isNone(handlers)) {
+        throw new Error(`
       No Handlers provided.
       Please ensure you have provided Handlers.
     `)
-  }
+    }
 
-  return handlers.value
+    return handlers.value
 }

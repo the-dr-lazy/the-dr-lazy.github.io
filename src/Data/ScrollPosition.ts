@@ -1,4 +1,4 @@
 export enum ScrollPosition {
-  Top,
-  Bottom,
+    Top,
+    Bottom,
 }

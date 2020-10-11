@@ -3,19 +3,19 @@
 @use "MQ" as *;
 
 .c-mdx {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-  margin-right: -68px;
+    margin-right: -68px;
 
-  @include mq($until: desktop) {
-    margin-right: -53px;
-  }
+    @include mq($until: desktop) {
+        margin-right: -53px;
+    }
 
-  @include mq($until: tablet) {
-    margin-right: 0;
-  }
+    @include mq($until: tablet) {
+        margin-right: 0;
+    }
 }

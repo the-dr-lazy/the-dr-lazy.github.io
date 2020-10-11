@@ -4,204 +4,200 @@
 @use "Typography";
 
 .c-articles-list-column {
-  &.-layout-rows {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 488px;
-    grid-column-gap: 96px;
-    grid-template-rows: 1;
-    align-items: center;
-    position: relative;
-    margin-bottom: 50px;
+    &.-layout-rows {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 488px;
+        grid-column-gap: 96px;
+        grid-template-rows: 1;
+        align-items: center;
+        position: relative;
+        margin-bottom: 50px;
 
-    @include mq($until: desktop) {
-      grid-column-gap: 24px;
-      grid-template-columns: 1fr 380px;
+        @include mq($until: desktop) {
+            grid-column-gap: 24px;
+            grid-template-columns: 1fr 380px;
+        }
+
+        @include mq($until: tablet) {
+            grid-template-columns: 1fr;
+        }
+
+        @media (max-width: 540px) {
+            background: #{Colour.get(card)};
+        }
+
+        @include mq($until: phablet) {
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
     }
 
-    @include mq($until: tablet) {
-      grid-template-columns: 1fr;
-    }
+    &.-layout-tiles {
+        position: relative;
 
-    @media (max-width: 540px) {
-      background: #{Colour.get(card)};
-    }
+        @include mq($until: tablet) {
+            margin-bottom: 60px;
+        }
+        @media (max-width: 540px) {
+            background: #{Colour.get(card)};
+        }
 
-    @include mq($until: phablet) {
-      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
+        @include mq($until: phablet) {
+            margin-bottom: 40px;
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
     }
-  }
-
-  &.-layout-tiles {
-    position: relative;
-
-    @include mq($until: tablet) {
-      margin-bottom: 60px;
-    }
-    @media (max-width: 540px) {
-      background: #{Colour.get(card)};
-    }
-
-    @include mq($until: phablet) {
-      margin-bottom: 40px;
-      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-  }
 }
 
 .c-articles-list-column__link {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border-radius: 5px;
-  z-index: 1;
-  transition: transform 0.33s #{Ease.$out-quart};
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-
-  &:hover h2,
-  &:focus h2 {
-    color: #{Colour.get(accent)};
-  }
-
-  &[data-a11y='true']:focus::after {
-    content: '';
-    position: absolute;
-    left: -1.5%;
-    top: -2%;
-    width: 103%;
-    height: 104%;
-    border: 3px solid #{Colour.get(accent)};
-    background: rgba(255, 255, 255, 0.01);
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     border-radius: 5px;
-  }
+    z-index: 1;
+    transition: transform 0.33s #{Ease.$out-quart};
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 
-  @include mq($until: phablet) {
-    &:active {
-      transform: scale(0.97) translateY(3px);
+    &:hover h2,
+    &:focus h2 {
+        color: #{Colour.get(accent)};
     }
-  }
+
+    &[data-a11y='true']:focus::after {
+        content: '';
+        position: absolute;
+        left: -1.5%;
+        top: -2%;
+        width: 103%;
+        height: 104%;
+        border: 3px solid #{Colour.get(accent)};
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 5px;
+    }
+
+    @include mq($until: phablet) {
+        &:active {
+            transform: scale(0.97) translateY(3px);
+        }
+    }
 }
 
 .c-articles-list-column__image {
-  position: relative;
-  height: 220px;
-  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3),
-    0 18px 36px -18px rgba(0, 0, 0, 0.33);
-  margin-bottom: 0;
-  transition: transform 0.3s #{Ease.$out-quad},
-    box-shadow 0.3s #{Ease.$out-quad};
+    position: relative;
+    height: 220px;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3), 0 18px 36px -18px rgba(0, 0, 0, 0.33);
+    margin-bottom: 0;
+    transition: transform 0.3s #{Ease.$out-quad}, box-shadow 0.3s #{Ease.$out-quad};
 
-  .c-articles-list-column.-layout-tiles & {
-    height: 280px;
-    margin-bottom: 30px;
-  }
+    .c-articles-list-column.-layout-tiles & {
+        height: 280px;
+        margin-bottom: 30px;
+    }
 
-  .c-articles-list-column.-narrow & {
-    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.22),
-      0 18px 36px -18px rgba(0, 0, 0, 0.25);
-  }
+    .c-articles-list-column.-narrow & {
+        box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.22), 0 18px 36px -18px rgba(0, 0, 0, 0.25);
+    }
 
-  & > div {
-    height: 100%;
-  }
+    & > div {
+        height: 100%;
+    }
 
-  .c-articles-list-column__link:hover &,
-  .c-articles-list-column__link:focus & {
-    transform: translateY(-1px);
-    box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.27),
-      0 30px 50px -30px rgba(0, 0, 0, 0.3);
+    .c-articles-list-column__link:hover &,
+    .c-articles-list-column__link:focus & {
+        transform: translateY(-1px);
+        box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.27), 0 30px 50px -30px rgba(0, 0, 0, 0.3);
+
+        @include mq($until: phablet) {
+            transform: none;
+            box-shadow: initial;
+        }
+    }
+
+    @include mq($until: tablet) {
+        height: 200px;
+        margin-bottom: 35px;
+    }
 
     @include mq($until: phablet) {
-      transform: none;
-      box-shadow: initial;
+        overflow: hidden;
+        margin-bottom: 0;
+        box-shadow: none;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
     }
-  }
-
-  @include mq($until: tablet) {
-    height: 200px;
-    margin-bottom: 35px;
-  }
-
-  @include mq($until: phablet) {
-    overflow: hidden;
-    margin-bottom: 0;
-    box-shadow: none;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-  }
 }
 
 .c-articles-list-column__title {
-  @extend %two-line-clamp;
+    @extend %two-line-clamp;
 
-  font-size: 21px !important;
-  margin-bottom: 10px;
-  transition: color 0.3s ease-in-out;
-
-  .c-articles-list-column.-has-overflow.-layout-tiles {
-    margin-bottom: 35px;
-  }
-
-  @include mq($until: desktop) {
-    margin-bottom: 15px;
-  }
-
-  @include mq($until: tablet) {
-    font-size: 24px;
-  }
-
-  @include mq($until: phablet) {
-    font-size: 22px;
-    padding: 30px 20px 0;
+    font-size: 21px !important;
     margin-bottom: 10px;
-    -webkit-line-clamp: 3;
-  }
+    transition: color 0.3s ease-in-out;
+
+    .c-articles-list-column.-has-overflow.-layout-tiles {
+        margin-bottom: 35px;
+    }
+
+    @include mq($until: desktop) {
+        margin-bottom: 15px;
+    }
+
+    @include mq($until: tablet) {
+        font-size: 24px;
+    }
+
+    @include mq($until: phablet) {
+        font-size: 22px;
+        padding: 30px 20px 0;
+        margin-bottom: 10px;
+        -webkit-line-clamp: 3;
+    }
 }
 
 .c-articles-list-column__excerpt {
-  @extend %two-line-clamp;
+    @extend %two-line-clamp;
 
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #{Colour.get(grey)};
-  // display: ${p => (p.hasOverflow && p.gridLayout === 'tiles' ? 'none' : 'box')};
-  max-width: 415px;
-
-  .c-articles-list-column.-narrow {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #{Colour.get(grey)};
+    // display: ${p => (p.hasOverflow && p.gridLayout === 'tiles' ? 'none' : 'box')};
     max-width: 415px;
-  }
 
-  @include mq($until: desktop) {
-    display: -webkit-box;
-  }
+    .c-articles-list-column.-narrow {
+        max-width: 415px;
+    }
 
-  @include mq($until: tablet) {
-    margin-bottom: 15px;
-  }
+    @include mq($until: desktop) {
+        display: -webkit-box;
+    }
 
-  @include mq($until: phablet) {
-    max-width: 100%;
-    padding: 0 20px;
-    margin-bottom: 20px;
-    -webkit-line-clamp: 3;
-  }
+    @include mq($until: tablet) {
+        margin-bottom: 15px;
+    }
+
+    @include mq($until: phablet) {
+        max-width: 100%;
+        padding: 0 20px;
+        margin-bottom: 20px;
+        -webkit-line-clamp: 3;
+    }
 }
 
 .c-articles-list-column__metadata {
-  font-weight: 600;
-  font-size: 16px;
-  color: #{Colour.get(grey)};
-  opacity: 0.33;
+    font-weight: 600;
+    font-size: 16px;
+    color: #{Colour.get(grey)};
+    opacity: 0.33;
 
-  @include mq($until: phablet) {
-    max-width: 100%;
-    padding: 0 20px 30px;
-  }
+    @include mq($until: phablet) {
+        max-width: 100%;
+        padding: 0 20px 30px;
+    }
 }

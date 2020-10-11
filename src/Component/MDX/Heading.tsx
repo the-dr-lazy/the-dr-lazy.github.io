@@ -5,15 +5,15 @@ import { defineDisplayName } from '~/Data'
 import { Level, component, Props } from '../Heading'
 
 function mkLevelComponent(level: Level) {
-  function c({ className, ...props }: Omit<Props, 'level'>) {
-    return component({
-      ...props,
-      className: cc(['c-mdx-heading', className]),
-      level,
-    })
-  }
+    function c({ className, ...props }: Omit<Props, 'level'>) {
+        return component({
+            ...props,
+            className: cc(['c-mdx-heading', className]),
+            level,
+        })
+    }
 
-  return c
+    return c
 }
 
 export const h1 = mkLevelComponent(Level.H2)

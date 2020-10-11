@@ -3,33 +3,33 @@
 @use "MQ" as *;
 
 .c-mdx-blockquote {
-  transition: #{Theme.$transition};
-  margin: 15px auto 50px;
-  color: #{Colour.get(article-text)};
-  font-style: italic;
-
-  @include mq($until: tablet) {
-    margin: 10px auto 35px;
-  }
-
-  .c-mdx-paragraph {
-    max-width: 880px !important;
-    padding-right: 100px;
-    padding-bottom: 0;
-    width: 100%;
-    margin: 0 auto;
-    font-size: 36px;
-    line-height: 1.32;
-    font-weight: bold;
+    transition: #{Theme.$transition};
+    margin: 15px auto 50px;
+    color: #{Colour.get(article-text)};
+    font-style: italic;
 
     @include mq($until: tablet) {
-      font-size: 26px;
-      padding: 0 180px;
+        margin: 10px auto 35px;
     }
 
-    @include mq($until: phablet) {
-      font-size: 36px;
-      padding: 0 20px 0 40px;
+    .c-mdx-paragraph {
+        max-width: 880px !important;
+        padding-right: 100px;
+        padding-bottom: 0;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 36px;
+        line-height: 1.32;
+        font-weight: bold;
+
+        @include mq($until: tablet) {
+            font-size: 26px;
+            padding: 0 180px;
+        }
+
+        @include mq($until: phablet) {
+            font-size: 36px;
+            padding: 0 20px 0 40px;
+        }
     }
-  }
 }

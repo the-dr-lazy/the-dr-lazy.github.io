@@ -1,3 +1,3 @@
 export enum Language {
-  FA = 'FA',
+    FA = 'FA',
 }

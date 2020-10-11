@@ -5,47 +5,47 @@
 @use "MQ" as *;
 
 .c-subscription-subscribed {
-  display: flex;
-  align-items: baseline;
+    display: flex;
+    align-items: baseline;
 
-  width: 100%;
+    width: 100%;
 
-  @include mq($until: tablet) {
-    flex-direction: column;
-  }
+    @include mq($until: tablet) {
+        flex-direction: column;
+    }
 }
 
 .c-subscription-subscribed__message {
-  width: auto;
+    width: auto;
 
-  @include Typography.font-weight(medium);
+    @include Typography.font-weight(medium);
 }
 
 .c-subscription-subscribed__resubscribe {
-  padding: 8px 13px;
-  margin-right: 34px;
+    padding: 8px 13px;
+    margin-right: 34px;
 
-  @include Typography.font-weight(bold);
-  @include Typography.farhang($kashidah: 8);
-  text-decoration: underline;
+    @include Typography.font-weight(bold);
+    @include Typography.farhang($kashidah: 8);
+    text-decoration: underline;
 
-  transition: color 0.15s #{Ease.$in-quad};
+    transition: color 0.15s #{Ease.$in-quad};
 
-  &:hover {
-    color: #{Colour.shade(Colour.view(light, accent), 13%)};
+    &:hover {
+        color: #{Colour.shade(Colour.view(light, accent), 13%)};
 
-    @include Theme.dark {
-      color: #{Colour.shade(Colour.view(dark, accent), 13%)};
+        @include Theme.dark {
+            color: #{Colour.shade(Colour.view(dark, accent), 13%)};
+        }
     }
-  }
 
-  &,
-  &:active {
-    color: #{Colour.get(accent)};
-  }
+    &,
+    &:active {
+        color: #{Colour.get(accent)};
+    }
 
-  @include mq($until: tablet) {
-    margin-top: 13px;
-    margin-right: -13px;
-  }
+    @include mq($until: tablet) {
+        margin-top: 13px;
+        margin-right: -13px;
+    }
 }

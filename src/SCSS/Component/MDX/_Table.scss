@@ -3,72 +3,72 @@
 @use "MQ" as *;
 
 .c-mdx-table {
-  overflow-x: auto;
-  padding: 0 20px;
+    overflow-x: auto;
+    padding: 0 20px;
 }
 
 .c-mdx-table__table {
-  position: relative;
-  line-height: 1.65;
-  color: #{Colour.get(grey)};
-  transition: #{Theme.$transition};
-  background: #{Colour.get(card)};
-  margin: 45px auto 85px;
-  width: 100%;
-  max-width: 1004px;
-  border: 1px solid #{Colour.get(horizontal-rule)};
-  border-radius: 5px;
-  overflow: hidden;
-  border-collapse: separate;
+    position: relative;
+    line-height: 1.65;
+    color: #{Colour.get(grey)};
+    transition: #{Theme.$transition};
+    background: #{Colour.get(card)};
+    margin: 45px auto 85px;
+    width: 100%;
+    max-width: 1004px;
+    border: 1px solid #{Colour.get(horizontal-rule)};
+    border-radius: 5px;
+    overflow: hidden;
+    border-collapse: separate;
 
-  @include mq($until: desktop) {
-    margin: 25px auto 65px;
-  }
+    @include mq($until: desktop) {
+        margin: 25px auto 65px;
+    }
 
-  @include mq($until: tablet) {
-    max-width: 486px;
-  }
+    @include mq($until: tablet) {
+        max-width: 486px;
+    }
 
-  @include mq($until: phablet) {
-    margin: 15px auto 55px;
-  }
+    @include mq($until: phablet) {
+        margin: 15px auto 55px;
+    }
 }
 
 .c-mdx-thead {
-  text-align: left;
-  border-collapse: collapse;
-  position: relative;
-  line-height: 1.756;
-  font-weight: 600;
-  color: #{Colour.get(primary)};
-  transition: #{Theme.$transition};
+    text-align: left;
+    border-collapse: collapse;
+    position: relative;
+    line-height: 1.756;
+    font-weight: 600;
+    color: #{Colour.get(primary)};
+    transition: #{Theme.$transition};
 }
 
 .c-mdx-th {
-  padding: 18px 30px;
-  font-size: 16px;
-  background: #{Colour.get(card)};
+    padding: 18px 30px;
+    font-size: 16px;
+    background: #{Colour.get(card)};
 
-  @include mq($until: desktop) {
-    padding: 14px 20px;
-  }
+    @include mq($until: desktop) {
+        padding: 14px 20px;
+    }
 
-  @include mq($until: tablet) {
-    font-size: 14px;
-  }
+    @include mq($until: tablet) {
+        font-size: 14px;
+    }
 }
 
 .c-mdx-td {
-  border-top: 1px solid #{Colour.get(horizontal-rule)};
-  padding: 15px 30px;
-  font-size: 16px;
-  background: #{Colour.get(card)};
+    border-top: 1px solid #{Colour.get(horizontal-rule)};
+    padding: 15px 30px;
+    font-size: 16px;
+    background: #{Colour.get(card)};
 
-  @include mq($until: desktop) {
-    padding: 14px 20px;
-  }
+    @include mq($until: desktop) {
+        padding: 14px 20px;
+    }
 
-  @include mq($until: tablet) {
-    font-size: 14px;
-  }
+    @include mq($until: tablet) {
+        font-size: 14px;
+    }
 }

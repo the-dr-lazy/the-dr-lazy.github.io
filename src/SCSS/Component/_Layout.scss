@@ -2,8 +2,8 @@
 @use "Colour";
 
 .c-container {
-  position: relative;
-  background: #{Colour.get(background)};
-  transition: #{Theme.$transition};
-  min-height: 100vh;
+    position: relative;
+    background: #{Colour.get(background)};
+    transition: #{Theme.$transition};
+    min-height: 100vh;
 }

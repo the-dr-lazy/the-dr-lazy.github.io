@@ -1,26 +1,26 @@
 @use "MQ" as *;
 
 .c-section {
-  width: 100%;
-  max-width: 1220px;
-  margin: 0 auto;
-  padding: 0 4rem;
-
-  @include mq($until: desktop) {
-    max-width: 850px;
-  }
-
-  @include mq($until: tablet) {
+    width: 100%;
+    max-width: 1220px;
+    margin: 0 auto;
     padding: 0 4rem;
-    max-width: 567px;
 
-    &.-narrow {
-      padding: 0 2rem;
-      max-width: 527px;
+    @include mq($until: desktop) {
+        max-width: 850px;
     }
-  }
 
-  @include mq($until: phablet) {
-    max-width: 100%;
-  }
+    @include mq($until: tablet) {
+        padding: 0 4rem;
+        max-width: 567px;
+
+        &.-narrow {
+            padding: 0 2rem;
+            max-width: 527px;
+        }
+    }
+
+    @include mq($until: phablet) {
+        max-width: 100%;
+    }
 }

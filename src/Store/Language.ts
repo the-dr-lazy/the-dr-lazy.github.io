@@ -25,15 +25,8 @@ export const reducer = constant(defaultState)
 // Epics
 //
 
-function setClassEpic(
-  _action$: Observable<AnyAction>,
-  state$: Observable<State>,
-) {
-  return state$.pipe(
-    distinctUntilChanged(),
-    map(mkDirection),
-    switchMap(Effect.DOM.setDirectionClass$),
-  )
+function setClassEpic(_action$: Observable<AnyAction>, state$: Observable<State>) {
+    return state$.pipe(distinctUntilChanged(), map(mkDirection), switchMap(Effect.DOM.setDirectionClass$))
 }
 
 export const epic = combineEpics(setClassEpic)

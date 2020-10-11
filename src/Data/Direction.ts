@@ -1,14 +1,14 @@
 import { Language } from '~/Data'
 
 export enum Direction {
-  RTL = 'rtl',
-  LTR = 'ltr',
+    RTL = 'rtl',
+    LTR = 'ltr',
 }
 
 const fromLanguagePattern = {
-  [Language.FA]: Direction.RTL,
+    [Language.FA]: Direction.RTL,
 }
 
 export function mkDirection(language: Language) {
-  return fromLanguagePattern[language]
+    return fromLanguagePattern[language]
 }

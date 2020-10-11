@@ -7,43 +7,36 @@ import { Author, VDOM, Article } from '~/Data'
 import { useSelector } from 'react-redux'
 
 type Props = PageProps<
-  undefined,
-  {
-    article: Article
-    authors: Author[]
-    basePath: string
-    permalink: string
-    slug: string
-    id: string
-    title: string
-    canocicalURL: string
-    next: Article[]
-  }
+    undefined,
+    {
+        article: Article
+        authors: Author[]
+        basePath: string
+        permalink: string
+        slug: string
+        id: string
+        title: string
+        canocicalURL: string
+        next: Article[]
+    }
 >
 
 function component(props: Props): VDOM {
-  const state = useSelector(Store.getRoot)
+    const state = useSelector(Store.getRoot)
 
-  const { location } = props
-  const { article, authors, next } = props.pageContext
-  const author = authors[0]
+    const { location } = props
+    const { article, authors, next } = props.pageContext
+    const author = authors[0]
 
-  return (
-    <>
-      <Template.Article.SEO.component
-        article={article}
-        authors={authors}
-        location={location}
-      />
-      <Template.Article.Hero.component article={article} author={author} />
-      <Template.Article.Body.component
-        theme={state.theme}
-        children={article.body}
-      />
-      {article.subscription && <Subscription.component />}
-      <Template.Article.Suggestions.component articles={[next[0], next[1]]} />
-    </>
-  )
+    return (
+        <>
+            <Template.Article.SEO.component article={article} authors={authors} location={location} />
+            <Template.Article.Hero.component article={article} author={author} />
+            <Template.Article.Body.component theme={state.theme} children={article.body} />
+            {article.subscription && <Subscription.component />}
+            <Template.Article.Suggestions.component articles={[next[0], next[1]]} />
+        </>
+    )
 }
 // function component() {
 //   return (

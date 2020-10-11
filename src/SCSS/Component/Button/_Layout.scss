@@ -2,47 +2,47 @@
 @use "Direction";
 
 .c-button-layout {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  width: 36px;
-  margin-right: 30px;
-  border-radius: 50%;
-
-  background: transparent;
-  transition: background 0.25s;
-
-  @include Direction.global(ltr) {
-    margin-right: 0;
-    margin-left: 30px;
-  }
-
-  &:hover {
-    background: #{Colour.get(hover)};
-  }
-
-  &[data-a11y='true']:focus::after {
-    content: '';
-    position: absolute;
-    left: -10%;
-    top: -10%;
-    width: 120%;
-    height: 120%;
-    border: 2px solid #{Colour.get(accent)};
-    background: rgba(255, 255, 255, 0.01);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    margin-right: 30px;
     border-radius: 50%;
-  }
+
+    background: transparent;
+    transition: background 0.25s;
+
+    @include Direction.global(ltr) {
+        margin-right: 0;
+        margin-left: 30px;
+    }
+
+    &:hover {
+        background: #{Colour.get(hover)};
+    }
+
+    &[data-a11y='true']:focus::after {
+        content: '';
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 120%;
+        height: 120%;
+        border: 2px solid #{Colour.get(accent)};
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 50%;
+    }
 }
 
 .c-button-layout__icon {
-  --path-fill: #{Colour.get(primary)};
+    --path-fill: #{Colour.get(primary)};
 
-  opacity: 0.25;
-  transition: opacity 0.2s;
+    opacity: 0.25;
+    transition: opacity 0.2s;
 
-  .c-button-layout.-is-active & {
-    opacity: 1;
-  }
+    .c-button-layout.-is-active & {
+        opacity: 1;
+    }
 }

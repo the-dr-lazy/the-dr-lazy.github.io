@@ -11,17 +11,4 @@ import * as Code from './Code'
 import * as LTR from './LTR'
 import * as YouTube from './YouTube'
 
-export {
-  Heading,
-  Paragraph,
-  Anchor,
-  Blockquote,
-  HorizontalRule,
-  Figcaption,
-  List,
-  Table,
-  Image,
-  Code,
-  LTR,
-  YouTube,
-}
+export { Heading, Paragraph, Anchor, Blockquote, HorizontalRule, Figcaption, List, Table, Image, Code, LTR, YouTube }

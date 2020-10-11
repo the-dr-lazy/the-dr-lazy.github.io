@@ -7,40 +7,40 @@
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-  font-size: inherit;
-  font-display: block;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-display: block;
 }
 
 :root {
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  box-sizing: border-box;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  height: 100%;
-  background: #{Colour.get(primary)};
+    margin: 0;
+    height: 100%;
+    background: #{Colour.get(primary)};
 
-  .-scroll-position-bottom & {
-    background-color: #{Colour.get(background-bottom)};
-  }
+    .-scroll-position-bottom & {
+        background-color: #{Colour.get(background-bottom)};
+    }
 }
 
 article {
-  word-break: break-word;
+    word-break: break-word;
 }
 
 button,
 a {
-  text-decoration: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 a:focus {
-  outline: none;
+    outline: none;
 }
 
 // audio,
@@ -57,67 +57,66 @@ input,
 textarea,
 select,
 button {
-  font-family: '-apple-system', 'BlinkMacSystemFont', 'San Francisco',
-    'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI',
-    'Arial', sans-serif;
+    font-family: '-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI',
+        'Arial', sans-serif;
 }
 
 button,
 input,
 select,
 textarea {
-  color: inherit;
-  font-family: inherit;
-  font-style: inherit;
-  font-weight: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
 }
 
 code,
 kbd,
 pre,
 samp {
-  font-family: monospace;
+    font-family: monospace;
 }
 
 fieldset,
 button {
-  appearance: none;
-  border: none;
-  outline: none;
-  background: transparent;
+    appearance: none;
+    border: none;
+    outline: none;
+    background: transparent;
 }
 
 table {
-  border-collapse: separate;
-  border-spacing: 0;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 audio:not([controls]) {
-  display: none;
+    display: none;
 }
 
 details {
-  display: block;
+    display: block;
 }
 
 input {
-  &:focus,
-  &:active {
-    outline: none;
-  }
-  &[type='number'] {
-    width: auto;
-  }
+    &:focus,
+    &:active {
+        outline: none;
+    }
+    &[type='number'] {
+        width: auto;
+    }
 }
 
 img.Image__Zoom ~ div {
-  background: transparent !important;
+    background: transparent !important;
 }
 
 @each $name in map.keys($breakpoints) {
-  .-hide-until-#{$name} {
-    @include mq($until: $name) {
-      display: none;
+    .-hide-until-#{$name} {
+        @include mq($until: $name) {
+            display: none;
+        }
     }
-  }
 }

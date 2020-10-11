@@ -2,49 +2,49 @@
 @use "MQ" as *;
 
 .c-subscription-subscribe {
-  width: 100%;
+    width: 100%;
 }
 
 .c-subscription-subscribe__heading {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 
-  @include mq($until: tablet) {
-    margin-bottom: 15px;
-  }
+    @include mq($until: tablet) {
+        margin-bottom: 15px;
+    }
 }
 
 .c-subscription-subscribe__subheading {
-  margin-bottom: 33px;
-  color: #{Colour.get(grey)};
-  line-height: 1.75;
+    margin-bottom: 33px;
+    color: #{Colour.get(grey)};
+    line-height: 1.75;
 
-  @include mq($until: tablet) {
-    padding: 0 26px;
-    margin-bottom: 21px;
-  }
+    @include mq($until: tablet) {
+        padding: 0 26px;
+        margin-bottom: 21px;
+    }
 }
 
 .c-subscription-subscribe__form {
-  display: flex;
-  align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
 
-  position: relative;
+    position: relative;
 
-  width: 100%;
+    width: 100%;
 }
 
 .c-subscription-subscribe__input {
-  width: 233px;
-  margin-left: 34px;
+    width: 233px;
+    margin-left: 34px;
 }
 
 .c-subscription-subscribe__email-input {
-  @extend .c-subscription-subscribe__input;
+    @extend .c-subscription-subscribe__input;
 
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .c-subscription-subscribe__submit {
-  height: 55px;
-  margin-top: 29px;
+    height: 55px;
+    margin-top: 29px;
 }

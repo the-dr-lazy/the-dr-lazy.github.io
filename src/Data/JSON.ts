@@ -10,8 +10,7 @@ import { parseJSON, toError } from 'fp-ts/lib/Either'
  * Decodes JSON string to a type
  */
 export function json<A>(decoder: Decoder<unknown, A>) {
-  const decode = flow(decoder.decode, E.mapLeft(toError))
+    const decode = flow(decoder.decode, E.mapLeft(toError))
 
-  return (input: string): Option<A> =>
-    pipe(parseJSON(input, toError), E.chain(decode), O.fromEither)
+    return (input: string): Option<A> => pipe(parseJSON(input, toError), E.chain(decode), O.fromEither)
 }

@@ -1,7 +1,7 @@
 module.exports = ({ actions }) => {
-  const { createTypes } = actions
+    const { createTypes } = actions
 
-  const typeDefs = `
+    const typeDefs = `
     type PluginOptions {
       basePath: String
       rootPath: String
@@ -11,5 +11,5 @@ module.exports = ({ actions }) => {
     }
   `
 
-  createTypes(typeDefs)
+    createTypes(typeDefs)
 }

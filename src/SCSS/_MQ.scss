@@ -3,13 +3,13 @@
 @use "Environment" as *;
 
 $breakpoints: (
-  mobile-sm: 320px,
-  mobile: 376px,
-  phablet: 540px,
-  tablet: 735px,
-  desktop: 1070px,
-  desktop-md: 1280px,
-  desktop-lg: 1440px,
+    mobile-sm: 320px,
+    mobile: 376px,
+    phablet: 540px,
+    tablet: 735px,
+    desktop: 1070px,
+    desktop-md: 1280px,
+    desktop-lg: 1440px,
 );
 
 @forward "sass-mq/mq" with (

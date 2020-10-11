@@ -9,16 +9,16 @@ import { ThrowReporter } from 'io-ts/lib/ThrowReporter'
 import { VDOM } from '~/Data'
 
 export const Metadata = t.type({
-  title: t.string,
-  name: t.string,
-  siteURL: t.string,
-  basePath: t.string,
-  description: t.string,
-  hero: t.string,
-  social: t.type({
-    twitter: optionFromNullable(t.string),
-    github: optionFromNullable(t.string),
-  }),
+    title: t.string,
+    name: t.string,
+    siteURL: t.string,
+    basePath: t.string,
+    description: t.string,
+    hero: t.string,
+    social: t.type({
+        twitter: optionFromNullable(t.string),
+        github: optionFromNullable(t.string),
+    }),
 })
 
 export type Metadata = t.TypeOf<typeof Metadata>
@@ -26,41 +26,41 @@ export type Metadata = t.TypeOf<typeof Metadata>
 const context = React.createContext<Option<Metadata>>(none)
 
 export function provider(props: React.PropsWithChildren<{}>): VDOM {
-  const query = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          basePath
-          description
-          hero
-          name
-          siteURL
-          social {
-            github
-          }
-          title
+    const query = useStaticQuery(graphql`
+        query {
+            site {
+                siteMetadata {
+                    basePath
+                    description
+                    hero
+                    name
+                    siteURL
+                    social {
+                        github
+                    }
+                    title
+                }
+            }
         }
-      }
-    }
-  `)
+    `)
 
-  const { Provider } = context
-  const validation = Metadata.decode(query.site.siteMetadata)
+    const { Provider } = context
+    const validation = Metadata.decode(query.site.siteMetadata)
 
-  ThrowReporter.report(validation)
+    ThrowReporter.report(validation)
 
-  return <Provider value={O.fromEither(validation)} {...props} />
+    return <Provider value={O.fromEither(validation)} {...props} />
 }
 
 export function ask(): Metadata {
-  const environment = React.useContext(context)
+    const environment = React.useContext(context)
 
-  if (isNone(environment)) {
-    throw new Error(`
+    if (isNone(environment)) {
+        throw new Error(`
       No Metadata provided.
       Please ensure you have provided Metadata.
     `)
-  }
+    }
 
-  return environment.value
+    return environment.value
 }

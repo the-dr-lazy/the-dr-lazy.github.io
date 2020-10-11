@@ -1,5 +1,5 @@
 module.exports = ({ actions }) => {
-  actions.createTypes(`
+    actions.createTypes(`
     type Article implements Node {
       id: ID!
       slug: String!

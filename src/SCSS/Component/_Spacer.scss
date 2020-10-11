@@ -2,10 +2,10 @@
 @use "Colour";
 
 .c-spacer {
-  opacity: 0.3;
-  color: #{Colour.get(primary)};
+    opacity: 0.3;
+    color: #{Colour.get(primary)};
 
-  @include mq($until: tablet) {
-    display: none;
-  }
+    @include mq($until: tablet) {
+        display: none;
+    }
 }

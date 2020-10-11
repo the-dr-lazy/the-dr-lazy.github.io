@@ -1,11 +1,11 @@
 import Prism from 'prismjs'
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      Prism: typeof Prism
+    namespace NodeJS {
+        interface Global {
+            Prism: typeof Prism
+        }
     }
-  }
 }
 
 global.Prism = Prism
@@ -34,21 +34,21 @@ require('prismjs/components/prism-nix')
 require('prismjs/components/prism-docker')
 
 Prism.languages.haskell = Prism.languages.extend('haskell', {
-  comment: [
-    {
-      pattern: /(^\{\-\#\s+[A-Z_]+\s+[A-z0-9-_]+\s+\#\-\}$)/m,
-      inside: {
-        pragma: {
-          pattern: /(^\{\-\#\s+)(?:[A-Z_]+)/m,
-          lookbehind: true,
+    comment: [
+        {
+            pattern: /(^\{\-\#\s+[A-Z_]+\s+[A-z0-9-_]+\s+\#\-\}$)/m,
+            inside: {
+                pragma: {
+                    pattern: /(^\{\-\#\s+)(?:[A-Z_]+)/m,
+                    lookbehind: true,
+                },
+            },
         },
-      },
-    },
-    {
-      pattern: /(^|[^-!$%*+=?&@|~.:<>^\\\/])(?:--[^-!$%*+=?&@|~.:<>^\\\/].*|{-[\s\S]*?-})/m,
-      lookbehind: true,
-    },
-  ],
+        {
+            pattern: /(^|[^-!$%*+=?&@|~.:<>^\\\/])(?:--[^-!$%*+=?&@|~.:<>^\\\/].*|{-[\s\S]*?-})/m,
+            lookbehind: true,
+        },
+    ],
 })
 
 export { Prism }

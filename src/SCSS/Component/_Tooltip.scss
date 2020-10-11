@@ -3,45 +3,45 @@
 @use "Colour";
 
 .c-tooltip {
-  position: absolute;
-  padding: 4px 13px;
-  background: rgba(0, 0, 0, 0.1);
-  color: #{Colour.get(black)};
-  border-radius: 5px;
-  font-size: 14px;
-  white-space: nowrap;
-  top: -30px;
-  opacity: 0;
-  transform: none;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    position: absolute;
+    padding: 4px 13px;
+    background: rgba(0, 0, 0, 0.1);
+    color: #{Colour.get(black)};
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    top: -30px;
+    opacity: 0;
+    transform: none;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
-  @include Typography.font-weight(semibold);
+    @include Typography.font-weight(semibold);
 
-  @include Theme.dark {
-    background: #{Colour.get(black)};
-    color: #{Colour.get(white)};
-  }
+    @include Theme.dark {
+        background: #{Colour.get(black)};
+        color: #{Colour.get(white)};
+    }
 
-  &.-is-active {
-    opacity: 1;
-    transform: translateY(-3px);
-  }
+    &.-is-active {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
 
-  // &::after {
-  //   content: '';
-  //   position: absolute;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: -6px;
-  //   margin: 0 auto;
-  //   width: 0;
-  //   height: 0;
-  //   border-left: 6px solid transparent;
-  //   border-right: 6px solid transparent;
-  //   border-top: 6px solid rgba(0, 0, 0, 0.1);
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   left: 0;
+    //   right: 0;
+    //   bottom: -6px;
+    //   margin: 0 auto;
+    //   width: 0;
+    //   height: 0;
+    //   border-left: 6px solid transparent;
+    //   border-right: 6px solid transparent;
+    //   border-top: 6px solid rgba(0, 0, 0, 0.1);
 
-  //   @include Theme.dark {
-  //     border-top-color: #{Colour.get(black)};
-  //   }
-  // }
+    //   @include Theme.dark {
+    //     border-top-color: #{Colour.get(black)};
+    //   }
+    // }
 }

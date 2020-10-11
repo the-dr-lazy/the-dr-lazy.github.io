@@ -6,86 +6,86 @@ $size: Typography.em(34);
 $animation-duration: 1.15s;
 
 .c-loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: $size;
-  height: 0;
-  overflow: visible;
-  padding-top: $size;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: $size;
+    height: 0;
+    overflow: visible;
+    padding-top: $size;
 }
 
 .c-loader__shape {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-  box-sizing: border-box;
-  border: 0 solid #{Colour.get(accent)};
+    box-sizing: border-box;
+    border: 0 solid #{Colour.get(accent)};
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  animation: shape-animation $animation-duration infinite #{Ease.$out-quad};
+    animation: shape-animation $animation-duration infinite #{Ease.$out-quad};
 
-  @keyframes shape-animation {
-    0% {
-      width: 0;
-      height: 0;
+    @keyframes shape-animation {
+        0% {
+            width: 0;
+            height: 0;
 
-      background-color: #{Colour.get(accent)};
+            background-color: #{Colour.get(accent)};
+        }
+
+        33.9% {
+            background-color: #{Colour.get(accent)};
+        }
+
+        34% {
+            width: $size;
+            height: $size;
+            border-width: #{$size / 2};
+
+            background-color: transparent;
+            opacity: 1;
+        }
+
+        100% {
+            width: $size;
+            height: $size;
+            border-width: 0;
+
+            background-color: transparent;
+            opacity: 0;
+        }
     }
-
-    33.9% {
-      background-color: #{Colour.get(accent)};
-    }
-
-    34% {
-      width: $size;
-      height: $size;
-      border-width: #{$size / 2};
-
-      background-color: transparent;
-      opacity: 1;
-    }
-
-    100% {
-      width: $size;
-      height: $size;
-      border-width: 0;
-
-      background-color: transparent;
-      opacity: 0;
-    }
-  }
 }
 
 .c-loader__label {
-  float: left;
-  transform: translateX(-50%);
-  margin: 0.5em 0 0 50%;
+    float: left;
+    transform: translateX(-50%);
+    margin: 0.5em 0 0 50%;
 
-  color: #{Colour.get(accent)};
+    color: #{Colour.get(accent)};
 
-  animation: label-animation #{$animation-duration * 3} infinite #{Ease.$out-quad};
+    animation: label-animation #{$animation-duration * 3} infinite #{Ease.$out-quad};
 
-  @keyframes label-animation {
-    0% {
-      opacity: 0.25;
+    @keyframes label-animation {
+        0% {
+            opacity: 0.25;
+        }
+
+        34% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0.25;
+        }
     }
-
-    34% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0.25;
-    }
-  }
 }
 
 .c-loader__space {
-  display: inline-block;
-  width: 34px;
+    display: inline-block;
+    width: 34px;
 }
