@@ -28,7 +28,8 @@
     "rxjs": "^6.6.3",
     "sass-easing": "^1.0.3",
     "sass-mq": "^5.0.1",
-    "tslib": "^1.14.0"
+    "tslib": "^1.14.0",
+    "victormono": "^1.4.1"
   },
   "devDependencies": {
     "@mdx-js/mdx": "^1.6.18",
