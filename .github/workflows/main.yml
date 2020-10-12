@@ -23,6 +23,7 @@ jobs:
 
             - name: Upload Artifact
               uses: actions/upload-artifact@master
+              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
               with:
                   name: public
                   path: public
