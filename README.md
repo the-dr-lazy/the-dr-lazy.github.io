@@ -1,23 +1,23 @@
 # Dr Lazy Blog
 
-welcome to Hohammad Hasani personal blog source code.
+Welcome to Hohammad Hasani's personal blog source code.
 
-# About Dr Lazy
+# About Dr. Lazy
 
 -   FP Zombie
 -   Medical student
 -   Future's neurosurgeon
 
-## Noticiable pages in blog
+## Noticiable Pages In Blog
 
--   Let's understand Side Effect [read](https://the-dr-lazy.github.io/understanding-side-effect-the-right-way)
+-   Let's Understand Side-Effect [read](https://the-dr-lazy.github.io/understanding-side-effect-the-right-way)
 
-## Technologies to build this website
+## Technologies To Build This Website
 
 -   static site by gatsby
 -   host by github pages
 
-## additional information
+## Additional Information
 
 -   contents are on [contents folder](./contents)
 -   you can view html version in [this link](https://the-dr-lazy.github.io/)
