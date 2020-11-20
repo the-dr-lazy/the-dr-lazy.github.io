@@ -18,6 +18,7 @@ const components: Components = {
     ...MDX.Code,
     LTR: MDX.LTR.component,
     YouTube: MDX.YouTube.component,
+    CodeFuse: MDX.Code.fuse,
 }
 
 export function provider(props: React.PropsWithChildren<{}>): VDOM {

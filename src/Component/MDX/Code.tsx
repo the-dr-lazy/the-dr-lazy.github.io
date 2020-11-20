@@ -35,7 +35,7 @@ export function code(props: CodeProps): VDOM {
         <Highlight {...defaultProps} Prism={Prism} code={codeString} language={language}>
             {({ className, tokens, getLineProps, getTokenProps }) => {
                 return (
-                    <div style={{ overflow: 'auto' }}>
+                    <div className="c-code-wrapper" style={{ overflow: 'auto' }}>
                         <pre className={className} style={{ position: 'relative' }}>
                             {tokens.map((line, index) => {
                                 const { className } = getLineProps({
@@ -95,4 +95,10 @@ export function pre(props: PreProps): VDOM {
     }
 
     return <pre {...derivedProps} />
+}
+
+type FuseProps = React.PropsWithChildren<{}>
+
+export function fuse(props: FuseProps): VDOM {
+    return <div {...props} className="c-code-fuse" />
 }

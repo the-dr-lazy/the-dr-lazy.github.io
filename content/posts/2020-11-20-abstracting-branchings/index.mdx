@@ -1,0 +1,705 @@
+---
+title: اگر If/Else را Abstract کنیم چی؟
+author: Dr. Lazy
+date: 2020-11-20
+hero: ./images/hero.jpg
+slug: abstracting-branchings
+---
+
+می‌خوام شما را با اصطلاحی آشنا کنم تحت عنوان
+ontogeny recapitulates phylogeny!
+که به قانون تشابه روند تکامل جنین تمام جانور‌ها اشاره میکنه.
+
+خب دانشمندان هم به کمی
+narcissism
+نیاز دارند!
+مثل حالا که از کلمه‌ی
+narcissism
+استفاده کردم که البته میتونستم از کلمه‌ی خودشیفتگی هم استفاده کنم.
+
+طی این پست تلاش میکنم به شما ثابت کنم که سه کلمه‌ی
+Functor,
+Applicative,
+Monad
+هم بر خلاف نام و رعشه‌ای که بر هیبت برنامه‌نویس‌ها وارد میکنند صرفا
+اصطلاحاتی دهان پرکن برای توصیف راه‌حل‌های روزمره‌ای هستند که هر برنامه‌نویسی به قطع یقین یکبار کشفشان کرده.
+
+## اندر حکایت branching در برنامه نویسی
+
+<LTR>
+
+> It's just 'IFs'. Hundreds and hundreds of IFs...
+
+</LTR>
+
+هرچند برنامه‌نویس‌ها از شنیدن این حقیقت بیزارند ولی غالب برنامه‌هایی که
+مینویسیم صرفا یک تعداد بسیار زیادی از
+If/Else
+هستند تا برنامه ما نسبت به ورودی‌های مشخص رفتار‌های مشخصی از خودش بروز بده.
+
+به فانکشن‌های زیر دقت کنید.
+
+```js
+function f(x) {
+  return 0
+}
+
+function g(x) {
+  if (x === 0) {
+    return 0
+  } else {
+    return 1
+  }
+}
+```
+
+فانشکن
+f
+فارغ از ورودی همواره از خودش یک رفتار نشان میده و از این رو یک شاخه بیشتر نداره.
+
+اما فانشکن
+g
+با توجه به ورودی
+**تصمیم میگیره**
+که باید مقدار 0 یا 1 را برگردونه و این باعث میشه که این فانشکن دوتا
+branch
+داشته باشه.
+
+عبارت‌هایی شبیه
+If/Else
+تنها کاری که میکنند اضافه کردن یکسری
+branch
+به برنامه شماست تا برنامه شما یک جرعه هوشمندانه‌تر رفتار کنه.
+
+حالا فرض کنید میخواهید برای فانشکن‌های
+f
+و
+g
+یکسری
+test
+بنویسید.
+چه موقعی میتونید ادعا کنید که تمام رفتار‌های برنامه‌تان را تست کردید؟
+زمانی که برای تک تک
+branch
+ها
+test
+نوشته باشید.
+
+<LTR>
+
+## Algebraic Structure
+
+</LTR>
+
+قصد ندارم یک اصطلاح عجیب و غریب دیگه به داستانمان اضافه کنم!
+ولی صرفا بدانید که واحد
+abstraction
+در ریاضی و البته
+FP
+چیزی هست به نام
+algebraic structure.
+هر
+algebraic structure
+مجموعه‌ای از
+operation(s)
+و
+axiom(s)
+هست.
+
+اجازه بدید به زبانِ زبان‌های برنامه‌نویسی رایج توضیح بدم.
+به مثال زیر که تعریف
+abstraction
+تساوی ریاضی به واسطه
+algebraic structure
+ای به نام
+Eq
+است نگاه کنید.
+
+```ts
+// Axioms:
+//   Reflexivity: x.equals(x) = true
+//   Symmetry:    x.equals(y) = y.equals(x)
+//   Negation:    x.notEquals(y) = !x.equals(y)
+//   ...
+
+interface Eq<T> {
+  equals(x: T): boolean
+  notEquals(x: T): boolean
+}
+```
+
+همانطور که میبینید یک
+interface
+تعریف کردیم که دوتا
+operation
+با نام‌های
+equals
+و
+notEquals
+را مشخص کرده.
+علاوه بر
+operation
+ها یک شرطی را به شکل
+comment
+مشخص کردیم که انتظار داریم تمام
+class
+هایی که سعی در پیاده‌سازی این
+interface
+آنها را رعایت کنند.
+
+خواهش میکنم مِن بعد به یاد داشته باشید که
+Functor,
+Applicative
+و
+Monad
+یک نوع
+algebraic structure
+هستند و این یعنی یکسری
+operation
+و یکسری
+axiom
+دارند.
+
+## خب که چی؟
+
+همانطور که گفتم
+algebraic structure
+واحد
+abstraction
+ما در
+FP
+است و این یعنی با واسطه
+Functor,
+Applicative
+و
+Monad
+ما قصد داریم یک چیزی را
+abstract
+کنیم.
+پس
+first things first.
+چه چیزی را می‌خواهیم
+abstract
+کنیم؟
+
+این سه یار غار
+(algebraic structure)
+زمانی به درد ما خواهند خورد که با
+datatype
+ای سر و کار داشته باشیم که دو یا چند مسیر
+(sum type)
+داشته باشه و یکسری از مسیر‌ها برای ما معنای خاصی داشته باشند.
+مثال بزنم؟
+بیاید به
+Maybe
+نگاه کنیم.
+
+برای کسانی که با
+Haskell
+حال میکنند:
+
+```hs
+data Maybe a = Just a | Nil
+```
+
+برای کسانی که به زودی با
+Haskell
+حال خواهند کرد:
+
+```ts
+type Maybe<a> = Maybe.Just<a> | Maybe.Nothing
+
+namespace Maybe {
+  const enum Tag {
+    Just
+    Nothing
+  }
+
+  export const Just = Tag.Just
+  export interface Just<a> {
+    tag: typeof Just
+    value: a
+  }
+  export function just<a>(value: a): Just<a> {
+    return { tag: Just, value }
+  }
+
+  export const Nothing = Tag.Nothing
+  export interface Nothing {
+    tag: typeof Nothing
+  }
+  export const nothing = { tag: Nothing }
+}
+```
+
+همانطور که میبینید
+Maybe
+دو مسیر داره که شامل
+Just
+و
+Nothing
+میشه. مسیر
+Just
+برای ما معنادار هست و ما معمولا با مقدار داخلش یکسری کار‌هایی خواهیم داشت ولی مسیر
+Nothing
+اینطور نیست.
+
+هر سه این
+algebraic structure
+ها
+operation
+اشان قرار که چک کنه اگر با مسیرهای معنادار روبرو شده
+یکسری کار انجام بده و اگر مسیر بی‌معنا بود ازش گذر کنه.
+
+حالا مضمون عنوان پست نباید ثقیل جلوه کنه براتان.
+**هدف هر سه این
+algebraic structure
+ها
+abstract
+کردن
+branching
+هایی هست که دائم‌العمر در حال تکرار شدن هستند.**
+
+<LTR>
+
+## Functor
+
+</LTR>
+
+فرض کنید یک برنامه میخوایم بنویسیم که مقدار
+Maybe Int
+را میگیره و قرار آن مقدار
+Int
+داخل را تبدیل کنه به
+String
+و در نهایت مقدار
+Maybe String
+را خروجی بده.
+
+<CodeFuse>
+
+```hs
+f :: Maybe Int -> Maybe String
+f Nothing  = Nothing
+f (Just x) = Just $ show x
+```
+
+```ts
+function f(x: Maybe<Int>): Maybe<String> {
+  switch (x.tag) {
+    case Maybe.Nothing: return Maybe.nothing
+    case Maybe.Just:    return Maybe.just(x.value.toString())
+  }
+}
+```
+
+</CodeFuse>
+
+شد
+لیکن به خون جگر شد.
+زیاد اتفاق خواهد افتاد که بخوایم از تایپ
+Maybe a
+بریم به
+Maybe b
+و همه دارند دقیقا از الگوی یکسانی پیروی میکنند
+(همان مسیر معنادار و مسیر بی‌معنا)
+پس بهتره که
+abstract
+اش کنیم.
+از
+operation
+داخل
+Functor
+با نام
+fmap
+یاد میکنیم.
+
+<CodeFuse>
+
+```hs {3}
+fmapMaybe :: Maybe a -> Maybe b
+fmapMaybe Nothing  = Nothing
+fmapMaybe (Just x) = Just $ ?
+```
+
+```ts {4}
+function fmapMaybe<a, b>(x: Maybe<a>): Maybe<b> {
+  switch (x.tag) {
+    case Maybe.Nothing: return Maybe.nothing
+    case Maybe.Just:    return Maybe.just(?)
+  }
+}
+```
+
+</CodeFuse>
+
+یک سطح
+abstract
+شدیم ولی دستمان زیر سنگ مانده! نمیدونیم چطور باید از تایپ
+a
+به
+b
+برسیم.
+پس نیاز داریم که دستور‌العمل این انتقال را بگیریم.
+
+<CodeFuse>
+
+```hs {1}
+fmapMaybe :: (a -> b) -> (Maybe a -> Maybe b)
+fmapMaybe _ Nothing  = Nothing
+fmapMaybe f (Just x) = Just $ f x
+```
+
+```ts {1}
+function fmapMaybe<a, b>(f: (a: a) => b, x: Maybe<a>): Maybe<b> {
+  switch (x.tag) {
+    case Maybe.Nothing: return Maybe.nothing
+    case Maybe.Just:    return Maybe.just(f(x.value))
+  }
+}
+```
+
+</CodeFuse>
+
+عالی شد.
+همین حین در واقع
+Maybe functor
+را کشف کردیم!
+ولی من هنوز راضی نیستم و نیاز دارم یک وهله دیگه در
+abstraction
+پیش برم و از
+ad-hoc polymorphism
+استفاده کنم چون تایپ‌هایی که توانایی تشکیل
+Functor
+را دارند مثل
+Maybe
+زیاد هستند.
+
+```hs
+fmap :: (a -> b) -> (f a -> f b)
+```
+
+درباره
+axiom
+هاش صحبتی نمیکنم چون نیازی نداریم بهشون فعلا!
+اما قبل از اینکه به سمت
+Applicative
+روانه بشیم یک نکته را به خاطر داشته باشید!
+بین این سه
+algebraic structure
+هرگز اجازه ندارید از داخل
+functor
+خارج بشید.
+همواره باید در نظر بگیرید که اجازه رفتن از
+`f a`
+به
+`a`
+را ندارید.
+
+```hs
+-- There is no such thing when you are thinking in these three algebraic structures
+extract :: f a -> a
+```
+
+<LTR>
+
+## Applicative
+
+</LTR>
+
+فرض کنید یک فرم دارید که دو ورودی
+username
+و
+password
+داره و ممکن مقداری داشته باشه و یا مقداری نداشته باشه و در نتیجه تصمیم میگیرید که با
+Maybe
+پرزنتش کنید.
+
+<CodeFuse>
+
+```hs
+username :: Maybe Username
+password :: Maybe Password
+```
+
+```ts
+declare const username: Maybe<Username>
+declare const password: Maybe<Password>
+```
+
+</CodeFuse>
+
+و هچنین فانکشنی دارید که برای ساخت
+User
+ازش استفاده میکنید.
+
+<CodeFuse>
+
+```hs
+mkUser :: Username -> Password -> User
+```
+
+```ts
+declare const mkUser: (u: Username) => (p: Password) => User
+```
+
+</CodeFuse>
+
+مسلما هر کدوم از مقدار‌های
+username
+یا
+password
+اگر
+Nothing
+باشند نمی‌تونیم با
+mkUser
+هیچ
+user
+ای بسازیم.
+
+ابتدا به روش
+impretive
+پیاده سازی کنیم ببینیم در چه حال هستیم!
+
+```ts
+function main() {
+  if (isNothing(username) || isNothing(password)) {
+    return
+  }
+
+  const user = mkUser(username.value)(password.value)
+}
+```
+
+زیبا نیست؟
+همان قضیه مسیر معنادار و مسیر بی‌معنی پابرجاست. :)
+یک جو انصاف
+پس چرا
+abstract
+اش نکنیم؟
+به کد پایین نگاه کنید:
+
+```hs {5}
+mkUser               :: Username -> (Password -> User)
+fmap                 :: (a       -> b                ) -> (f a        -> f     b                )
+fmap mkUser          ::                                    f Username -> f     (Password -> User)
+fmap mkUser username ::                                                  Maybe (Password -> User)
+```
+
+خب تا به اینجای کار فانشکن
+mkUser
+را به
+fmap
+اپلای کردیم و فانشکن ما منتظر
+password
+هست تا بتونه
+user
+را بسازه ولی یک مشکل بزرگ داریم!
+فانشکنمان داخل
+Maybe
+گیر کرده! :(
+
+خانم‌ها و‌آقایان شما را با
+apply
+آشنا میکنم.
+
+```hs
+apply :: f a -> f b
+```
+
+شبیه
+fmap
+نیست؟
+باز دستمان زیر سنگ مانده و بازم
+نمیدونیم چطور باید از
+a
+برسیم به
+b.
+
+```hs
+apply :: f (a -> b) -> (f a -> f b)
+fmap  ::   (a -> b) -> (f a -> f b)
+```
+
+مقایسه کنید!
+تنها تفاوتشان در فانشکنی هست که قرار ما را از
+a
+ببره به
+b!
+توی
+apply
+در اصل فانشکنمان داخل
+functor
+(همان f)
+گیر کرده!
+اگر برای
+Maybe
+تایپ را
+concrete
+کنیم میشه:
+
+```hs
+apply :: Maybe (a -> b) -> (Maybe a -> Maybe b)
+fmap  ::       (a -> b) -> (Maybe a -> Maybe b)
+```
+
+برگردیم سراغ سناریوای که مطرح کردیم.
+
+```hs
+fmap mkUser username :: Maybe (Password -> User)
+
+apply                                 :: f (a -> b) -> (f a            -> f b       )
+apply (fmap mkUser username)          ::               (Maybe Password -> Maybe User)
+apply (fmap mkUser username) password ::                                  Maybe User
+```
+
+حل شد ولی یحتمل توی دلتان دارید لعن نفرین میکنید که این چه وضع خوانایی هست!
+من هم زیبایی را دوست دارم پس بیاید زیبا کنیم این کد را.
+
+```hs
+(<$>) ::   (a -> b) -> (f a -> f b)
+(<*>) :: f (a -> b) -> (f a -> f b)
+
+mkUser <$> username
+       <*> password
+```
+
+باید خودتان دیگه متوجه شده باشید که
+`<$>`
+همان
+fmap
+و
+`<*>`
+همان
+apply
+هستند.
+میدونم دارید عاشق
+Haskell
+میشید! (یا شایدم شده‌اید) :D
+
+
+<LTR>
+
+# Monad
+
+</LTR>
+
+برای درک
+Monad
+باید اول دقت کنید که هر
+Monad
+ای یک
+Functor
+که دست و پا در آورده!
+یعنی یک
+operation
+اضافه‌تر علاوه بر
+fmap
+داره به نام
+join.
+
+<CodeFuse>
+
+```hs
+join :: f (f a) -> f a
+```
+
+```ts
+// This type signature isn't impossible in TypeScript BTW :D
+declare const join: <f, a>(x: f<f<a>>) => f<a>
+```
+
+</CodeFuse>
+
+حال سناریویی را در نظر بگیرید که شما یک فرم دارید با ورودی
+username
+که ممکن مقداری داشته باشه و یا نداشته باشه.
+و همچنین فانشکشنی دارید با نام
+findUserByUsername
+که در دیتابیس ول می‌گرده تا یک
+user
+را با
+username
+ای که بهش داده شده پیدا کنه که صد البته ممکن که چیزی پیدا نکنه.
+(معصوم‌تر از این فانشکن هم داریم؟)
+
+```hs
+username :: Maybe Username
+
+findUserByUsername :: Username -> Maybe User
+```
+
+بیاید فانکشن
+findUserByUsername
+را اپلای کنیم به
+fmap
+و ببینیم چه خواهد شد؟!
+
+```hs
+findUserByUsername               :: (Username -> Maybe User)
+fmap                             :: (a        -> b         ) -> (f a -> f b)
+fmap findUserByUsername          :: (f Username -> f     (Maybe User))
+fmap findUserByUsername username ::                Maybe (Maybe User)
+```
+
+نتیجه نهایی دوتا
+Maybe
+تو در تو هست که اصلا فایده‌ای نداره!
+مسخره‌است!
+خب
+join
+به دادمان خواهد رسید.
+
+```hs
+fmap findUserByUsername username :: Maybe (Maybe User)
+
+join (fmap findUserByUsername username) :: Maybe User
+```
+
+اما همچنان زیاد راضی کننده نیست این روش
+composition
+برای همین فانشکنی کمکی داخل
+Monad
+داریم به نام
+bind
+که حاصل لقاح
+fmap
+و
+join
+هست.
+
+```hs
+bind :: (a -> f b) -> (f a -> f b)
+bind f fa = join (fmap f fa)
+
+bind findUserByUsername username :: Maybe User
+```
+
+به زبان
+bind operator
+اگر بنویسم.
+
+```hs
+(>>=) :: f a -> (a -> f b) -> f b
+username >>= findUserByUsername
+```
+
+## ختم کلام
+
+کجا دیده بودید که
+branching
+را هم
+abstract
+کنند؟
+
+```hs
+fmap  ::   (a -> b  ) -> (f a -> f b)
+apply :: f (a -> b  ) -> (f a -> f b)
+bind  ::   (a -> f b) -> (f a -> f b)
+```
+
+این میزان از هماهنگی عاشقانه نیست؟
+به هارمونی عاشقانه
+FP
+خوش آمدید.
+امیدوارم لذت برده باشید.

@@ -239,3 +239,21 @@ $operator: #5fa8aa;
         padding: 0 20px;
     }
 }
+
+.c-code-fuse {
+    .prism-code {
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    .c-code-wrapper:first-child .prism-code {
+        margin-top: 15px;
+        border-radius: 13px 13px 0 0;
+    }
+
+    .c-code-wrapper:last-child .prism-code {
+        margin-bottom: 50px;
+        border-radius-bottom: 0 0 13px 13px;
+    }
+}
