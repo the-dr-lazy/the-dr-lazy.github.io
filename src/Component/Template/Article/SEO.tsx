@@ -24,6 +24,7 @@ type Props = {
     authors: Author[]
     location: Location
     imagelocation?: string
+    theme: Theme
 }
 
 export function component(props: Props): VDOM {
@@ -35,6 +36,7 @@ export function component(props: Props): VDOM {
 
     return (
         <SEO.component
+            theme={props.theme}
             author={{
                 name: authors.map(author => author.name).join(','),
                 slug: authors.map(author => author.slug).join(','),

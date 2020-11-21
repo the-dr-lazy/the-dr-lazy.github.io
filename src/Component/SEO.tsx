@@ -5,8 +5,9 @@ import { pipe } from 'fp-ts/lib/pipeable'
 import { Helmet } from 'react-helmet'
 
 import * as Metadata from '~/Metadata'
-import { VDOM, defineDisplayName, optionToArrayConcatMap, optionToArrayMap } from '~/Data'
+import { VDOM, defineDisplayName, optionToArrayConcatMap, optionToArrayMap, isDark, Theme } from '~/Data'
 import { isSome } from 'fp-ts/lib/Option'
+import theme from 'prism-react-renderer/themes/*'
 
 type Props = React.PropsWithChildren<{
     title?: string
@@ -24,6 +25,7 @@ type Props = React.PropsWithChildren<{
         name: string
         bio: string
     }
+    theme: Theme
 }>
 
 function mkSiteSchema(props: Props & { socials: string; pageURL: string }) {
@@ -253,6 +255,7 @@ export function component(props: Props): VDOM {
 
     const { children, pathname, canonicalURL, isBlogPost } = props
 
+    const { theme } = props
     const title = props.title || metadata.title
     const description = props.description || metadata.description
     const image = pipe(props.image, O.fromNullable, O.getOrElse(constant('/preview.jpg')))
@@ -282,7 +285,7 @@ export function component(props: Props): VDOM {
             },
             {
                 name: 'theme-color',
-                content: '#fff',
+                content: isDark(theme) ? '#000' : '#fff',
             },
             { itemprop: 'name', content: title },
             { itemprop: 'description', content: description },

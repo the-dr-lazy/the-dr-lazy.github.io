@@ -30,7 +30,7 @@ function component(props: Props): VDOM {
 
     return (
         <>
-            <Template.Article.SEO.component article={article} authors={authors} location={location} />
+            <Template.Article.SEO.component theme={state.theme} article={article} authors={authors} location={location} />
             <Template.Article.Hero.component article={article} author={author} />
             <Template.Article.Body.component theme={state.theme} children={article.body} />
             {article.subscription && <Subscription.component />}

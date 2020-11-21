@@ -302,18 +302,21 @@ module.exports = {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 /* eslint-disable @typescript-eslint/camelcase */
-                name: 'gatsby-starter-default',
-                short_name: 'starter',
+                name: `Dr. Lazy's Personal Blog`,
+                short_name: 'Dr. Lazy',
+                description: 'Technical & Biological Words from My Heart',
+                lang: 'fa',
+                display: `standalone`,
                 start_url: '/',
-                background_color: '#663399',
-                theme_color: '#663399',
-                display: 'minimal-ui',
+                scope: '/',
+                background_color: '#fafafa',
+                theme_color_in_head: false,
                 // icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
                 /* eslint-enable @typescript-eslint/camelcase */
             },
         },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
-        // "gatsby-plugin-offline",
+        'gatsby-plugin-offline',
     ],
 }

@@ -35,7 +35,7 @@ export function component(props: Props): VDOM {
 
     return (
         <>
-            <SEO.component pathname={props.location.pathname} />
+            <SEO.component theme={state.theme} pathname={props.location.pathname} />
             <Template.Articles.Hero.component articlesLayout={state.articles.layout} featuredAuthor={featuredAuthor.value} />
             <Section.narrow>
                 <Template.Articles.List.component layout={state.articles.layout} articles={articles} />
