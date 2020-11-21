@@ -1,7 +1,13 @@
 @use "Colour";
+@use "MQ" as *;
 
 .c-mdx-paragraph {
     margin: 0 auto 35px;
 
     color: #{Colour.get(article-text)};
+
+    @include mq($until: phablet) {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 }

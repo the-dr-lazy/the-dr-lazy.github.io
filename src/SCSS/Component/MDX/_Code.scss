@@ -122,10 +122,6 @@ $operator: #5fa8aa;
     //   color: #5fa8aa !important;
     // }
 
-    @include mq($until: desktop) {
-        left: -26px;
-    }
-
     @include mq($until: tablet) {
         max-width: 526px;
         padding: 20px 20px;
@@ -137,12 +133,8 @@ $operator: #5fa8aa;
         border-radius: 0;
         margin: 0 auto 25px;
         padding: 25px 20px;
-        overflow: initial;
-        width: unset;
-        max-width: unset;
         float: left;
         min-width: 100%;
-        overflow: initial;
         position: relative;
     }
 }
