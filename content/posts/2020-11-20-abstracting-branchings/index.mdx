@@ -16,6 +16,7 @@ narcissism
 مثل حالا که از کلمه‌ی
 narcissism
 استفاده کردم که البته میتونستم از کلمه‌ی خودشیفتگی هم استفاده کنم.
+(البته من دانشمند نیستم!)
 
 طی این پست تلاش میکنم به شما ثابت کنم که سه کلمه‌ی
 Functor,
@@ -23,6 +24,8 @@ Applicative,
 Monad
 هم بر خلاف نام و رعشه‌ای که بر هیبت برنامه‌نویس‌ها وارد میکنند صرفا
 اصطلاحاتی دهان پرکن برای توصیف راه‌حل‌های روزمره‌ای هستند که هر برنامه‌نویسی به قطع یقین یکبار کشفشان کرده.
+
+---
 
 ## اندر حکایت branching در برنامه نویسی
 
@@ -33,43 +36,40 @@ Monad
 </LTR>
 
 هرچند برنامه‌نویس‌ها از شنیدن این حقیقت بیزارند ولی غالب برنامه‌هایی که
-مینویسیم صرفا یک تعداد بسیار زیادی از
+می نویسیم صرفا یک تعداد بسیار زیادی از
 If/Else
 هستند تا برنامه ما نسبت به ورودی‌های مشخص رفتار‌های مشخصی از خودش بروز بده.
 
-به فانکشن‌های زیر دقت کنید.
 
 ```js
 function f(x) {
-  return 0
+    return 0
 }
 
 function g(x) {
-  if (x === 0) {
-    return 0
-  } else {
-    return 1
-  }
+    if (x === 0) {
+        return 0
+    } else {
+        return 1
+    }
 }
 ```
 
 فانشکن
 f
 فارغ از ورودی همواره از خودش یک رفتار نشان میده و از این رو یک شاخه بیشتر نداره.
-
 اما فانشکن
 g
 با توجه به ورودی
 **تصمیم میگیره**
 که باید مقدار 0 یا 1 را برگردونه و این باعث میشه که این فانشکن دوتا
-branch
-داشته باشه.
+شاخه داشته باشه.
 
 عبارت‌هایی شبیه
 If/Else
 تنها کاری که میکنند اضافه کردن یکسری
 branch
-به برنامه شماست تا برنامه شما یک جرعه هوشمندانه‌تر رفتار کنه.
+به برنامه شماست تا برنامه یک جرعه هوشمندانه‌تر رفتار کنه.
 
 حالا فرض کنید میخواهید برای فانشکن‌های
 f
@@ -92,7 +92,7 @@ test
 </LTR>
 
 قصد ندارم یک اصطلاح عجیب و غریب دیگه به داستانمان اضافه کنم!
-ولی صرفا بدانید که واحد
+ولی باید بدانیم که واحد
 abstraction
 در ریاضی و البته
 FP
@@ -123,8 +123,8 @@ Eq
 //   ...
 
 interface Eq<T> {
-  equals(x: T): boolean
-  notEquals(x: T): boolean
+    equals(x: T): boolean
+    notEquals(x: T): boolean
 }
 ```
 
@@ -183,7 +183,7 @@ abstract
 کنیم؟
 
 این سه یار غار
-(algebraic structure)
+(Functor, Applicative, Monad)
 زمانی به درد ما خواهند خورد که با
 datatype
 ای سر و کار داشته باشیم که دو یا چند مسیر
@@ -210,25 +210,25 @@ Haskell
 type Maybe<a> = Maybe.Just<a> | Maybe.Nothing
 
 namespace Maybe {
-  const enum Tag {
-    Just
-    Nothing
-  }
+    const enum Tag {
+        Just,
+        Nothing,
+    }
 
-  export const Just = Tag.Just
-  export interface Just<a> {
-    tag: typeof Just
-    value: a
-  }
-  export function just<a>(value: a): Just<a> {
-    return { tag: Just, value }
-  }
+    export const Just = Tag.Just
+    export interface Just<a> {
+        tag: typeof Just
+        value: a
+    }
+    export function just<a>(value: a): Just<a> {
+        return { tag: Just, value }
+    }
 
-  export const Nothing = Tag.Nothing
-  export interface Nothing {
-    tag: typeof Nothing
-  }
-  export const nothing = { tag: Nothing }
+    export const Nothing = Tag.Nothing
+    export interface Nothing {
+        tag: typeof Nothing
+    }
+    export const nothing = { tag: Nothing }
 }
 ```
 
@@ -251,7 +251,7 @@ operation
 اشان قرار که چک کنه اگر با مسیرهای معنادار روبرو شده
 یکسری کار انجام بده و اگر مسیر بی‌معنا بود ازش گذر کنه.
 
-حالا مضمون عنوان پست نباید ثقیل جلوه کنه براتان.
+حالا مضمون عنوان پست نباید ثقیل جلوه کنه.
 **هدف هر سه این
 algebraic structure
 ها
@@ -283,13 +283,13 @@ f :: Maybe Int -> Maybe String
 f Nothing  = Nothing
 f (Just x) = Just $ show x
 ```
-
+<!-- prettier-ignore -->
 ```ts
 function f(x: Maybe<Int>): Maybe<String> {
-  switch (x.tag) {
-    case Maybe.Nothing: return Maybe.nothing
-    case Maybe.Just:    return Maybe.just(x.value.toString())
-  }
+    switch (x.tag) {
+        case Maybe.Nothing: return Maybe.nothing
+        case Maybe.Just:    return Maybe.just(x.value.toString())
+    }
 }
 ```
 
@@ -322,12 +322,13 @@ fmapMaybe Nothing  = Nothing
 fmapMaybe (Just x) = Just $ ?
 ```
 
+<!-- prettier-ignore -->
 ```ts {4}
 function fmapMaybe<a, b>(x: Maybe<a>): Maybe<b> {
-  switch (x.tag) {
-    case Maybe.Nothing: return Maybe.nothing
-    case Maybe.Just:    return Maybe.just(?)
-  }
+    switch (x.tag) {
+        case Maybe.Nothing: return Maybe.nothing
+        case Maybe.Just:    return Maybe.just(?)
+    }
 }
 ```
 
@@ -350,12 +351,13 @@ fmapMaybe _ Nothing  = Nothing
 fmapMaybe f (Just x) = Just $ f x
 ```
 
+<!-- prettier-ignore -->
 ```ts {1}
 function fmapMaybe<a, b>(f: (a: a) => b, x: Maybe<a>): Maybe<b> {
-  switch (x.tag) {
-    case Maybe.Nothing: return Maybe.nothing
-    case Maybe.Just:    return Maybe.just(f(x.value))
-  }
+    switch (x.tag) {
+        case Maybe.Nothing: return Maybe.nothing
+        case Maybe.Just:    return Maybe.just(f(x.value))
+    }
 }
 ```
 
@@ -365,15 +367,17 @@ function fmapMaybe<a, b>(f: (a: a) => b, x: Maybe<a>): Maybe<b> {
 همین حین در واقع
 Maybe functor
 را کشف کردیم!
-ولی من هنوز راضی نیستم و نیاز دارم یک وهله دیگه در
+اما ازتان اجازه می‌خوام که بهم فرصت بدید که یک وهله دیگه در
 abstraction
 پیش برم و از
 ad-hoc polymorphism
-استفاده کنم چون تایپ‌هایی که توانایی تشکیل
-Functor
-را دارند مثل
+استفاده کنم چون
+datatype
+های امثال
 Maybe
-زیاد هستند.
+که توانایی تشکیل
+Functor
+کم نیستند!
 
 ```hs
 fmap :: (a -> b) -> (f a -> f b)
@@ -407,13 +411,13 @@ extract :: f a -> a
 
 </LTR>
 
-فرض کنید یک فرم دارید که دو ورودی
+سناریویی را در نظر بگیرید که فرمی دارید با دو ورودی
 username
 و
 password
-داره و ممکن مقداری داشته باشه و یا مقداری نداشته باشه و در نتیجه تصمیم میگیرید که با
+که هر کدام ممکن مقداری داشته باشند یا خیر و در نتیجه تصمیم میگیرید که با
 Maybe
-پرزنتش کنید.
+پرزنتشان کنید.
 
 <CodeFuse>
 
@@ -431,7 +435,7 @@ declare const password: Maybe<Password>
 
 و هچنین فانکشنی دارید که برای ساخت
 User
-ازش استفاده میکنید.
+ازش استفاده می کنید.
 
 <CodeFuse>
 
@@ -445,7 +449,7 @@ declare const mkUser: (u: Username) => (p: Password) => User
 
 </CodeFuse>
 
-مسلما هر کدوم از مقدار‌های
+مسلما هر کدام از مقدار‌های
 username
 یا
 password
@@ -463,11 +467,11 @@ impretive
 
 ```ts
 function main() {
-  if (isNothing(username) || isNothing(password)) {
-    return
-  }
+    if (isNothing(username) || isNothing(password)) {
+        return
+    }
 
-  const user = mkUser(username.value)(password.value)
+    const user = mkUser(username.value)(password.value)
 }
 ```
 
@@ -577,7 +581,6 @@ apply
 Haskell
 میشید! (یا شایدم شده‌اید) :D
 
-
 <LTR>
 
 # Monad
@@ -614,14 +617,17 @@ declare const join: <f, a>(x: f<f<a>>) => f<a>
 حال سناریویی را در نظر بگیرید که شما یک فرم دارید با ورودی
 username
 که ممکن مقداری داشته باشه و یا نداشته باشه.
-و همچنین فانشکشنی دارید با نام
+و همچنین فانشکنی دارید با نام
 findUserByUsername
 که در دیتابیس ول می‌گرده تا یک
 user
 را با
 username
 ای که بهش داده شده پیدا کنه که صد البته ممکن که چیزی پیدا نکنه.
-(معصوم‌تر از این فانشکن هم داریم؟)
+(من را به یاد
+HDL-C
+می‌ندازه!
+آخر مگر معصوم‌تر از این فانشکن هم داریم؟)
 
 ```hs
 username :: Maybe Username
@@ -637,9 +643,9 @@ fmap
 
 ```hs
 findUserByUsername               :: (Username -> Maybe User)
-fmap                             :: (a        -> b         ) -> (f a -> f b)
-fmap findUserByUsername          :: (f Username -> f     (Maybe User))
-fmap findUserByUsername username ::                Maybe (Maybe User)
+fmap                             :: (a        -> b         ) -> (f a           -> f  b           )
+fmap findUserByUsername          ::                             (f Username -> f     (Maybe User))
+fmap findUserByUsername username ::                                            Maybe (Maybe User)
 ```
 
 نتیجه نهایی دوتا
@@ -686,11 +692,16 @@ username >>= findUserByUsername
 
 ## ختم کلام
 
+حدس میزنم که دیگه حدس زده باشید که چرا در هر محفلی بحث
+از کاربردی بودن این سه
+algebraic structure
+هستش!
 کجا دیده بودید که
 branching
 را هم
 abstract
 کنند؟
+:)
 
 ```hs
 fmap  ::   (a -> b  ) -> (f a -> f b)
@@ -703,3 +714,4 @@ bind  ::   (a -> f b) -> (f a -> f b)
 FP
 خوش آمدید.
 امیدوارم لذت برده باشید.
+
