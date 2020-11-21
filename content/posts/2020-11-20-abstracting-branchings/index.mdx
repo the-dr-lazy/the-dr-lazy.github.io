@@ -40,7 +40,6 @@ Monad
 If/Else
 هستند تا برنامه ما نسبت به ورودی‌های مشخص رفتار‌های مشخصی از خودش بروز بده.
 
-
 ```js
 function f(x) {
     return 0
@@ -283,6 +282,7 @@ f :: Maybe Int -> Maybe String
 f Nothing  = Nothing
 f (Just x) = Just $ show x
 ```
+
 <!-- prettier-ignore -->
 ```ts
 function f(x: Maybe<Int>): Maybe<String> {
@@ -475,9 +475,10 @@ function main() {
 }
 ```
 
+کلاه خودتان را قاضی کنید؛
+یک جو انصاف؛
 زیبا نیست؟
 همان قضیه مسیر معنادار و مسیر بی‌معنی پابرجاست. :)
-یک جو انصاف
 پس چرا
 abstract
 اش نکنیم؟
@@ -714,4 +715,3 @@ bind  ::   (a -> f b) -> (f a -> f b)
 FP
 خوش آمدید.
 امیدوارم لذت برده باشید.
-
