@@ -311,7 +311,7 @@ module.exports = {
                 scope: '/',
                 background_color: '#fafafa',
                 theme_color_in_head: false,
-                // icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+                icon: 'assets/images/icon.png', // This path is relative to the root of the site.
                 /* eslint-enable @typescript-eslint/camelcase */
             },
         },
