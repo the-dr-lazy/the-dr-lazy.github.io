@@ -309,7 +309,7 @@ module.exports = {
                 display: `standalone`,
                 start_url: '/',
                 scope: '/',
-                background_color: '#fafafa',
+                background_color: '#000',
                 theme_color_in_head: false,
                 icon: 'assets/images/icon.png', // This path is relative to the root of the site.
                 icon_options: {

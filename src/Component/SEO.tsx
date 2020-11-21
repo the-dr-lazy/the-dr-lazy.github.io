@@ -255,12 +255,12 @@ export function component(props: Props): VDOM {
 
     const { children, pathname, canonicalURL, isBlogPost } = props
 
-    const { theme } = props
     const title = props.title || metadata.title
     const description = props.description || metadata.description
     const image = pipe(props.image, O.fromNullable, O.getOrElse(constant('/preview.jpg')))
     const publishedAt = O.fromNullable(props.publishedAt)
     const timeToRead = O.fromNullable(props.timeToRead)
+    const themeColor = isDark(props.theme) ? '#000' : '#fff'
 
     const pageURL = metadata.siteURL + pathname
 
@@ -285,7 +285,11 @@ export function component(props: Props): VDOM {
             },
             {
                 name: 'theme-color',
-                content: isDark(theme) ? '#000' : '#fff',
+                content: themeColor,
+            },
+            {
+                name: 'background-color',
+                content: themeColor,
             },
             { itemprop: 'name', content: title },
             { itemprop: 'description', content: description },
