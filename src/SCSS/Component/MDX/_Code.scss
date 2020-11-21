@@ -242,10 +242,18 @@ $operator: #5fa8aa;
     .c-code-wrapper:first-child .prism-code {
         margin-top: 15px;
         border-radius: 13px 13px 0 0;
+
+        @include mq($until: phablet) {
+            border-radius: 0;
+        }
     }
 
     .c-code-wrapper:last-child .prism-code {
         margin-bottom: 50px;
         border-radius: 0 0 13px 13px;
+
+        @include mq($until: phablet) {
+            border-radius: 0;
+        }
     }
 }
