@@ -1,9 +1,9 @@
 {
-  "name": "thebrodmann.com",
+  "name": "the-dr-lazy.github.io",
   "private": true,
   "description": "Personal Blog",
   "version": "0.0.0",
-  "author": "Mohammad Hasani <thebrodmann@protonmail.com>",
+  "author": "Mohammad Hasani (the-dr-lazy.github.io) <the-dr-lazy@pm.me>",
   "dependencies": {
     "classcat": "^4.1.0",
     "deox": "^3.3.0",
