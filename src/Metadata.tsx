@@ -36,6 +36,7 @@ export function provider(props: React.PropsWithChildren<{}>): VDOM {
                     name
                     siteURL
                     social {
+                        twitter
                         github
                     }
                     title

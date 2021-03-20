@@ -20,6 +20,7 @@ module.exports = {
         hero: 'Technical & Biological Words from My Heart',
         social: {
             github: 'https://github.com/the-dr-lazy',
+            twitter: 'https://twitter.com/the_dr_lazy',
         },
     },
     mapping: {
