@@ -31,9 +31,11 @@ Monad
 
 <LTR>
 
+
 > It's just 'IFs'. Hundreds and hundreds of IFs...
 
 </LTR>
+
 
 هرچند برنامه‌نویس‌ها از شنیدن این حقیقت بیزارند ولی غالب برنامه‌هایی که
 می نویسیم صرفا یک تعداد بسیار زیادی از
@@ -86,9 +88,11 @@ test
 
 <LTR>
 
+
 ## Algebraic Structure
 
 </LTR>
+
 
 قصد ندارم یک اصطلاح عجیب و غریب دیگه به داستانمان اضافه کنم!
 ولی باید بدانیم که واحد
@@ -261,9 +265,11 @@ branching
 
 <LTR>
 
+
 ## Functor
 
 </LTR>
+
 
 فرض کنید یک برنامه میخوایم بنویسیم که مقدار
 Maybe Int
@@ -276,6 +282,7 @@ Maybe String
 را خروجی بده.
 
 <CodeFuse>
+
 
 ```hs
 f :: Maybe Int -> Maybe String
@@ -294,6 +301,7 @@ function f(x: Maybe<Int>): Maybe<String> {
 ```
 
 </CodeFuse>
+
 
 شد،
 لیکن به خون جگر شد.
@@ -316,6 +324,7 @@ fmap
 
 <CodeFuse>
 
+
 ```hs {3}
 fmapMaybe :: Maybe a -> Maybe b
 fmapMaybe Nothing  = Nothing
@@ -334,6 +343,7 @@ function fmapMaybe<a, b>(x: Maybe<a>): Maybe<b> {
 
 </CodeFuse>
 
+
 یک سطح
 abstract
 شدیم ولی دستمان زیر سنگ مانده! نمیدونیم چطور باید از تایپ
@@ -344,6 +354,7 @@ b
 پس نیاز داریم که دستور‌العمل این انتقال را بگیریم.
 
 <CodeFuse>
+
 
 ```hs {1}
 fmapMaybe :: (a -> b) -> (Maybe a -> Maybe b)
@@ -362,6 +373,7 @@ function fmapMaybe<a, b>(f: (a: a) => b, x: Maybe<a>): Maybe<b> {
 ```
 
 </CodeFuse>
+
 
 عالی شد.
 همین حین در واقع
@@ -407,9 +419,11 @@ extract :: f a -> a
 
 <LTR>
 
+
 ## Applicative
 
 </LTR>
+
 
 سناریویی را در نظر بگیرید که فرمی دارید با دو ورودی
 username
@@ -420,6 +434,7 @@ Maybe
 پرزنتشان کنید.
 
 <CodeFuse>
+
 
 ```hs
 username :: Maybe Username
@@ -433,11 +448,13 @@ declare const password: Maybe<Password>
 
 </CodeFuse>
 
+
 و هچنین فانکشنی دارید که برای ساخت
 User
 ازش استفاده می کنید.
 
 <CodeFuse>
+
 
 ```hs
 mkUser :: Username -> Password -> User
@@ -448,6 +465,7 @@ declare const mkUser: (u: Username) => (p: Password) => User
 ```
 
 </CodeFuse>
+
 
 مسلما هر کدام از مقدار‌های
 username
@@ -584,9 +602,11 @@ Haskell
 
 <LTR>
 
+
 # Monad
 
 </LTR>
+
 
 برای درک
 Monad
@@ -604,6 +624,7 @@ join.
 
 <CodeFuse>
 
+
 ```hs
 join :: f (f a) -> f a
 ```
@@ -614,6 +635,7 @@ declare const join: <f, a>(x: f<f<a>>) => f<a>
 ```
 
 </CodeFuse>
+
 
 حال سناریویی را در نظر بگیرید که شما یک فرم دارید با ورودی
 username
