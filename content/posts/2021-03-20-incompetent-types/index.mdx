@@ -1,0 +1,446 @@
+---
+title: تایپ‌های ناشایسته
+author: Dr. Lazy
+date: 2021-03-20
+hero: ./images/hero.webp
+slug: incompetent-types
+---
+
+این پست اولین بخش از سری پست‌های «طریقت یک
+FP
+زامبی در طراحی نرم‌افزار» است.
+در این سری از پست‌ها من تلاش میکنم که به ساده‌ترین شکل ممکن اصول
+درست طراحی نرم‌افزار را با استفاده از قدرت
+functional programming
+و
+type-driven design
+به شما آموزش بدم.
+
+-   تایپ‌های ناشایسته
+-   کوری boolean و شواهد عمومی
+-   نگهبان در خروجی
+-   تایپ‌هایی که روح دارند
+-   شواهد اختصاصی
+
+چند نکته من باب این سری از پست‌ها:
+
+1. تنها ابزار مورد نیاز جهت پیاده‌سازی این اصول یک زبان
+   static type
+   است.
+   (ترجیحا از خانواده ML)
+2. اصول عنوان شده
+   framework-agnostic
+   هستند.
+3. علی‌رغم این حقیقت که این اصول از
+   functional programming
+   نشات میگیرند
+   در
+   object-oriented programming
+   هم قابلیت اجرا دارند.
+   (تا حدودی!)
+
+---
+
+تایپ واقعا چیه؟!
+کاری به تعاریف رسمی ندارم.
+من معتقدم که مفهوم تایپ از بدو وجود با ذهن ما آمیخته شده
+و اساس و پایه تفکر ما را تشکیل میده.
+من تایپ را یک
+**دسته**
+از موجودیت‌هایی تعریف میکنم که بین‌شان حداقل یک صفت مشترک آنها را به هم مرتبط میکنه.
+
+مِن باب مثال،
+تایپ
+`Square`
+را در نظر بگیرید که صفت مشترک بین اعضای این تایپ مربع بودن است.
+
+```haskell
+data Square = ShortSquare | MediumSquare | LongSquare
+```
+
+همانطور که میبینید من از کلمه
+**دسته**
+جهت تعریف تایپ استفاده کردم.
+هر دسته
+(set)
+می‌تونه از 0 الی
+∞
+عضو
+(inhabitant)
+تشکیل شده باشه.
+تایپ
+`Square`
+همانطور که میبینید سه
+inhabitant
+داره.
+تایپ اعداد طبیعی
+(ℕ)
+هم میتونه یک مثال از تایپی با بینهایت
+inhabitant
+باشه:
+
+```haskell
+data ℕ = 1 | 2 | 3 | ...
+```
+
+به نظرتان صفت مشترک بین
+inhabitant
+های تایپ
+ℕ
+چه چیزی میتونه باشه؟
+
+## شایستگی تایپ!
+
+حالا که با مفهوم
+type
+و
+inhabitant
+آشنا شدیم، میتونم موضوع اصلی این پست را عنوان کنم.
+
+> زمانی که یک تایپ
+> inhabitant
+> های بیشتری نسبت به منطق تحت توصیف شما را همراه
+> خودش حمل کند، آن تایپ برای آن جایگاه ناشایسته است.
+
+فرض کنید برنامه‌ای دارید که
+متشکل از تعدادی کاربر و پروژه است و رابطه بین
+کاربر و پروژه به صورت
+n-n
+است.
+هر کاربر ممکنه منتسب به 0 تا
+∞
+پروژه باشه و بالعکس.
+من از شما می‌خوام
+function
+ای تعریف کنید که یک
+User
+را به عنوان ورودی میگیره و تعداد پروژه‌های منتسب به آن کاربر را برمیگردونه.
+چه تایپی را برای خروجی این
+function
+انتخاب میکنید؟
+
+```haskell
+countProjectsRelatedToUser :: User -> ?
+```
+
+فرض کنید تایپ
+Int
+را انتخاب کنیم که متشکل از تمام اعداد صحیح میشه.
+
+```haskell
+data Int = ... | -1 | 0 | +1 | ...
+```
+
+آیا می‌تونیم از این تایپ استفاده کنیم؟
+البته که میتونیم!
+ما به تایپی نیاز داریم که از اعداد
+0
+تا
+∞+
+بخشی از دامنه آن تایپ باشه و تایپ
+Int
+تمام این اعداد را در دامنه خودش داره.
+اما آیا هیچوقت فانکشن
+`countProjectsRelatedToUser`
+یک عدد منفی را برمیگردونه؟
+فرض کنید که بر اساس خروجی این
+function
+ما قصد داریم که یک عملیاتی انجام بدیم:
+
+```haskell
+countProjectsRelatedToUser :: User -> Int
+
+f :: Int -> String
+f 0 = "You havn't any project."
+f 1 = "You have one project."
+f n | n > 0 = "You have multiple projects."
+    | n < 0 = error "UNREACHABLE"
+```
+
+ما میدونیم که شاخه‌ی
+`n < 0`
+با توجه به منطقی که تعریف کردیم ممکن نیست که رخ بده.
+وجود
+`Unreachable branch exception`
+نشانه خوبی نیست!
+
+اگر به‌جای تایپ
+Int
+از تایپ
+Whole
+استفاده کنیم چطور؟
+
+```haskell
+data Whole = 0 | 1 | ...
+
+countProjectsRelatedToUser :: User -> Whole
+
+f :: Whole -> String
+f 0 = "You havn't any project."
+f 1 = "You have one project."
+f _ = "You have multiple projects."
+```
+
+میبینید که تایپ
+`Whole`
+کاملا مطابق تعریف ما از خروجی
+`countProjectsRelatedToUser`
+تعریف شده.
+نه یک
+inhabitant
+بیشتر و نه یک
+inhabitant
+کمتر!
+همینطور میبینید که دیگه نیازی به
+`Unreachable branch exception`
+نیست.
+
+لذا با توجه به منطقی که تعریف کردیم تایپ
+Int
+به عنوان خروجی
+`countProjectsRelatedToUser`
+یک تایپ ناشایسته به حساب میاد و استفاده از یک تایپ ناشایسته
+همانطور که دیدید، میتونه مشکلات جدی‌ای در طراحی نرم‌افزار ما ایجاد کنه!
+
+## چطور تایپ‌های شایسته تعریف کنیم؟
+
+حالا که احاطه خوبی نسبت به شایستگی یک تایپ دارید، باید این سوال برای شما مطرح بشه
+که چطور تایپ‌های شایسته با توجه به
+business logic
+خودمان تعریف کنیم؟!
+
+بعضی از تایپ‌ها ممکنه که توسط زبانی که با آن کار میکنید تعریف شده باشند،
+اما قطعا خیلی از تایپ‌هایی که متناسب با نیاز‌های شما باشند را باید
+خودتان تعریف کنید.
+برای درک این موضوع با مثال پیش خواهیم رفت.
+هر مثال با دو زبان
+Haskell
+و
+TypeScript
+پیاده‌سازی خواهند شد.
+
+### سناریو ۱ - Non-empty List
+
+در نظر بگیرید در برنامه‌ای قصد دارید تایپ
+User
+را به شکلی مدل کنید که همواره هر کاربر حداقل باید یک
+E-Mail
+در سیستم داشته باشه.
+
+```haskell
+data User = User { emails :: ? Email }
+```
+
+برای پیاده‌سازی منطق
+non-empty
+کافیه مطمئن بشید که همواره اولین مقدار داخل
+List
+وجود داره.
+
+<CodeFuse>
+
+
+```typescript {3}
+namespace Array {
+    export class NonEmpty<a> {
+        constructor(private _first: a, private _rest: Array<a>) {}
+    }
+}
+```
+
+```typescript
+type User = {
+    emails: Array.NonEmpty<Email>
+}
+
+declare const email1: Email
+declare const email2: Email
+
+const user: User = {
+    emails: new Array.NonEmpty(email1, [email2]),
+}
+```
+
+</CodeFuse>
+
+
+در
+Haskell
+هم به شکل مشابه‌ای میتونید این کار را بکنید.
+کافیه که یک
+product type
+از اولین و مابقی مقادیر تشکیل بدید:
+
+<CodeFuse>
+
+
+```haskell {3}
+module Data.List (NonEmpty(..)) where
+
+data NonEmpty a = a `NonEmpty` [a]
+```
+
+```haskell
+module User where
+
+import qualified Data.List as List
+
+data User = User { emails :: List.NonEmpty Email }
+
+email1 :: Email
+email2 :: Email
+
+user = User { emails = email1 `NonEmpty` [email2] }
+```
+
+</CodeFuse>
+
+
+### سناریو ۲ - E-Mail
+
+اگر بخواهید یک تایپ برای
+E-Mail
+انتخاب کنید، یحتمل تا قبل از مطالعه این پست
+String
+را انتخاب می‌کردید.
+اما همانطور که خودتان دیگه میتونید حدس بزنید تایپ
+String
+شایستگی جالبی برای بیان
+E-Mail
+ندارد.
+
+```haskell
+data String = "a" | "b" | "the_dr_lazt@pm.me" | ...
+```
+
+در واقع تایپ
+String
+بینهایت
+inhabitant
+دارد که اصلا در دامنه
+E-Mail
+نیستند.
+خب قطعا باید تایپ جدیدی وارد سیستم کنید.
+اما دیگه مثل سناریو اول انقدر این موضوع ساده نیست که با ساختن یک
+product type
+بتونید این تایپ را بیان کنید.
+
+برای بیان چنین تایپی باید یک
+wrapper
+برای تایپ
+String
+درست کنیم و تنها راه ساخته شدن تایپ جدید را محدود به مسیر
+validate
+شده کنید.
+
+```typescript {4, 7}
+declare const isValidEmail: (value: string) => boolean
+
+class Email {
+    private constructor(private _value: string) {}
+
+    // smart constructor
+    public static mk(value: string): Maybe<Email> {
+        if (!isValidEmail(value)) return Maybe.nothing
+
+        return Maybe.just(new Email(value))
+    }
+}
+```
+
+همانطور که میبینید با
+private
+کردن
+constructor
+جلوی ساخته شدن تایپ
+Email
+از خارج کلاس
+Email
+گرفته شده.
+تنها راه ساخت تایپ
+Email
+با استفاده از فانکشن
+mk
+است که همواره از نظر
+valid
+بودن، ورودی را بررسی میکنه و صرفا زمانی تایپ
+Email
+را برمیگردونه که حتما ورودی
+valid
+باشه.
+همانطور که میبینید تایپ
+Email
+صرفا یک
+wrapper
+برای تایپ
+String
+به حساب میاد.
+
+اما پیاده‌سازی این تایپ در
+Haskell
+بسیار جالب‌تر میشه.
+
+```haskell {1}
+module Email (Email, mk) where
+
+data Email = Email String
+
+mk :: String -> Email
+mk = undefined
+```
+
+در اینجا هم در خط اول ما جلوی
+export
+شدن
+data constructor
+برای
+Email
+را گرفتیم.
+این پیاده‌سازی با مثال
+OOP
+توفیقی نداره.
+اما ما در
+Haskell
+مجبور نیستیم برای معرفی کردن تایپ جدید به کامپایلر یک
+object
+بسازیم!
+
+```haskell
+newtype Email = Email String
+```
+
+با استفاده از
+newtype
+در
+Haskell
+ما تایپ جدیدی به نام
+Email
+می‌سازیم ولی در زمان
+runtime
+مقدار تایپ
+Email
+لیترالی هیچ توفیقی با
+String
+نداره.
+به عبارتی
+memory representation
+دو مقدار زیر با هم کاملا یکسان هستند:
+
+```haskell
+x = Email "the_dr_lazy@pm.me"
+y = "the_dr_lazy@pm.me"
+```
+
+## ختم کلام
+
+مثال‌های متعددی وجود دارند که شما می‌تونید با توجه به
+business logic
+تان از این اصل استفاده کنید.
+امیدوارم که لذت برده باشید و این پست دانش کاربردی به شما منتقل کرده باشه.
+اگر سوالی دارید، مثل همیشه می‌تونید با من از طریق
+Twitter
+در ارتباط باشید.
+
+همچنین امیدوارم که هرچه زودتر قسمت‌های بعدی این سری از پست‌ها را
+بتونم بنویسم.
+با حمایتتان هم میتونید من را از کاربردی بودنه این سری از پست‌ها آگاه کنید.
