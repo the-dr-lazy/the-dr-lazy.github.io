@@ -1,0 +1,28 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "01:30"
+  open-pull-requests-limit: 10
+  target-branch: master
+  reviewers:
+  - the-dr-lazy
+  assignees:
+  - the-dr-lazy
+  labels:
+  - dependencies
+  ignore:
+  - dependency-name: ts-node
+    versions:
+    - 9.1.0
+  - dependency-name: gatsby-transformer-sharp
+    versions:
+    - 2.7.0
+  - dependency-name: gatsby-page-utils
+    versions:
+    - 0.4.0
+  - dependency-name: eslint-plugin-react
+    versions:
+    - 7.21.5
