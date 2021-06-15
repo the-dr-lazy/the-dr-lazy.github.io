@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@mdx-js/mdx": "^1.6.18",
-    "@mdx-js/react": "^1.6.18",
+    "@mdx-js/react": "^1.6.22",
     "@raae/gatsby-remark-oembed": "^0.1.1",
     "@types/prismjs": "^1.16.1",
     "@types/react-helmet": "^5.0.16",
