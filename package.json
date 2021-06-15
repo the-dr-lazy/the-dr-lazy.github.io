@@ -53,7 +53,7 @@
     "gatsby-plugin-manifest": "^2.4.34",
     "gatsby-plugin-mdx": "^2.7.1",
     "gatsby-plugin-offline": "^3.2.31",
-    "gatsby-plugin-react-helmet": "^3.3.14",
+    "gatsby-plugin-react-helmet": "^3.10.0",
     "gatsby-plugin-sass": "^2.3.21",
     "gatsby-plugin-sharp": "^2.6.40",
     "gatsby-plugin-theme-ui": "^0.3.0",
