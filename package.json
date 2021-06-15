@@ -6,7 +6,7 @@
   "author": "Mohammad Hasani (the-dr-lazy.github.io) <the-dr-lazy@pm.me>",
   "dependencies": {
     "classcat": "^4.1.0",
-    "deox": "^3.3.0",
+    "deox": "^3.3.1",
     "fp-ts": "^2.8.3",
     "gatsby": "^2.24.73",
     "gatsby-plugin-mailchimp": "^5.2.2",
