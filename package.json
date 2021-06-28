@@ -11,7 +11,7 @@
     "gatsby": "^2.24.73",
     "gatsby-plugin-mailchimp": "^5.2.2",
     "io-ts": "^2.2.11",
-    "io-ts-types": "^0.5.11",
+    "io-ts-types": "^0.5.16",
     "normalize.css": "^8.0.1",
     "prism-react-renderer": "^1.1.1",
     "prismjs": "^1.23.0",
