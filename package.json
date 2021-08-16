@@ -16,7 +16,7 @@
     "prism-react-renderer": "^1.1.1",
     "prismjs": "^1.23.0",
     "react": "^16.14.0",
-    "react-dom": "^16.12.0",
+    "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^5.7.2",
     "react-medium-image-zoom": "^4.3.1",
